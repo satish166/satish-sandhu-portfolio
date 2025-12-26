@@ -1,0 +1,13 @@
+.page-layout {
+    display: flex;
+    align-items: start;
+
+    .sidebar-section {
+        flex: 0 0 250px;
+    }
+
+    .main-content {
+        flex: 0 0 calc(100% - 250px);
+        margin-left: auto;
+    }
+}

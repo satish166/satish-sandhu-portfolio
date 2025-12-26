@@ -1,0 +1,13 @@
+@import './variables';
+
+* {
+    font-family: 'Poppins';
+}
+
+a {
+    text-decoration: none;
+    
+    &:hover {
+        color: $primary;
+    }
+}
