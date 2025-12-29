@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as vars;
 
 * {
     font-family: 'Poppins';
@@ -8,6 +8,6 @@ a {
     text-decoration: none;
     
     &:hover {
-        color: $primary;
+        color: #739eff;
     }
 }
