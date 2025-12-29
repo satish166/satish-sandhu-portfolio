@@ -1,4 +1,4 @@
-@import '../../styles/components/variables';
+@use '../../styles/components/variables' as vars;
 
 
 .sidebar-section {
@@ -12,7 +12,7 @@
 
     p,
     h4 {
-        color: $white;
+        color: white;
     }
 
     .sidebar-content {
@@ -43,16 +43,16 @@
                 font-size: 16px;
                 font-weight: 400;
                 padding: 15px 10px;
-                color: $gray;
+                color: #a8a9b4;
                 display: flex;
                 align-items: center;
                 gap: 20px;
 
                 &:hover {
-                    color: $white;
+                    color: white;
 
                     svg {
-                        color: $primary;
+                        color: #739eff;
                     }
                 }
 

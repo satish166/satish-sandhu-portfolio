@@ -1,4 +1,4 @@
-@import '../../../styles/components/variables';
+@use '../../../styles/components/variables' as vars;
 
 .main-banner {
     position: relative;
@@ -23,7 +23,7 @@
         left: 50px;
         top: 50%;
         z-index: 11;
-        color: $white;
+        color: #ffffff;
         .cursor {
             position: relative;
             width: 24em;
