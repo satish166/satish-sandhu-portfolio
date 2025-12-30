@@ -1,0 +1,117 @@
+@use '../../../styles/components/variables' as *;
+
+.contact-section {
+    padding-block: 50px;
+    background-color: $gray420;
+
+    .row {
+        gap: 20px 0;
+    }
+
+    .work-content {
+        position: relative;
+
+        .left-section {
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            height: 90%;
+            min-height: 470px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: $black;
+            padding: 30px;
+            box-shadow: 0 5px 9px 2px #a1a1a1;
+            border-radius: 10px;
+
+            h2,
+            a,
+            p,
+            span,
+            h6 {
+                color: $white;
+            }
+
+            .contact-us-icons {
+                color: $white;
+                filter: brightness(0) saturate(100%) invert(98%) sepia(0%) saturate(5%) hue-rotate(164deg) brightness(103%) contrast(103%);
+                max-width: 35px;
+            }
+
+            .contact-us {
+                h6 {
+                    font-weight: 600;
+                }
+
+                ul {
+                    list-style: none;
+
+                    .list-item {
+                        margin-bottom: 20px;
+                        padding-bottom: 20px;
+                        border-bottom: 1px solid $gray2;
+                        display: flex;
+                        gap: 20px;
+                    }
+                }
+
+                .social-links {
+                    display: flex;
+                    gap: 20px;
+                    margin-block: 20px;
+                    img {
+                        max-width: 30px;
+                    }
+                    li {
+                        height: 50px;
+                        width: 50px;
+                        border: 1px solid $primary;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        a {
+                            &:hover {
+                                img {
+                                    filter: brightness(0) saturate(100%) invert(40%) sepia(69%) saturate(3475%) hue-rotate(1deg) brightness(91%) contrast(97%);
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .right-section {
+            box-shadow: 0 1px 5px 0px #a1a1a1;
+            border-radius: 10px;
+            background: $white;
+            padding: 20px;
+            max-width: 100%;
+            margin-left: 80px;
+            height: 100%;
+
+            .get-in-touch {
+                padding-block: 20px;
+                form {
+                    margin-top: 20px;
+
+                    .field {
+                        margin-bottom: 20px;
+
+                        label {
+                            display: block;
+                            font-size: 13px;
+                        }
+
+                        input {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

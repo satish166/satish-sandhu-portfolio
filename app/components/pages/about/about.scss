@@ -1,0 +1,17 @@
+@use '../../../styles/components/variables' as *;
+
+.about-section {
+    margin-top: 50px;
+    .personal-info {
+        margin-block: 50px;
+        ul {
+            margin-top: 40px;
+            column-count: 2;
+            li {
+                display: flex;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

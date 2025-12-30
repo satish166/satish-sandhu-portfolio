@@ -1,0 +1,175 @@
+@use './variables' as *;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    forLaptop: 1400px,
+    xxl: 1640px,
+);
+
+
+@mixin media-breakpoint-down-xxl {
+    @media (max-width: 1640px) {
+        @content;
+    }
+ }
+@mixin media-breakpoint-down-forLaptop {
+    @media (max-width: 1400px) {
+        @content;
+    }
+ }
+@mixin media-breakpoint-down-xl {
+    @media (max-width: 1200px) {
+        @content;
+    }
+ }
+@mixin media-breakpoint-down-lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+ }
+@mixin media-breakpoint-down-md {
+    @media (max-width: 768px) {
+        @content;
+    }
+ }
+@mixin media-breakpoint-down-sm {
+    @media (max-width: 575px) {
+        @content;
+    }
+ }
+
+
+
+ 
+ @mixin button($style: "") {
+    display: inline-block;
+    cursor: pointer;
+    color: $white;
+    line-height: 33px;
+    letter-spacing: normal;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 15px;
+    transition: all .3s ease;
+    position: relative;
+    border-radius: 0;
+    min-height: 38px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    box-shadow: none; 
+    align-content: center;
+    outline: none;
+    border-radius: 5px;
+    background-color: transparent;
+    @include media-breakpoint-down-xxl {
+        line-height: 26px;
+        padding: 0 10px;
+        font-size: 12px;
+        min-height: 20px;
+    }
+
+    @if $style ==primary {
+        background-color: $primary;
+        border-color: $primary;
+
+        &:hover, &:active, &:not(:disabled):not(.disabled):active {
+            background-color: $primary;
+            border-color: $primary;
+            color: $white;
+        }
+    }
+
+    @if $style ==secondary {
+        background-color: $secondary;
+        border-color: $darksecondary;
+
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            background-color: $darksecondary;
+            border-color: $secondary;
+            color: $white;
+        }
+    }
+    @if $style ==light-green {
+        background-color: $dimGreen;
+        border: 1px solid $midGreen;
+        color: $darkGreen;
+
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            background-color: $dimGreen;
+            border-color: $midGreen;
+            color: $darkGreen;
+        }
+    }
+    @if $style ==outline-red {
+        background-color: $white;
+        border: 1px solid $gray2;
+        color: $red;
+
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            background-color: $red;
+            border-color: $red;
+            color: $white;
+        }
+    }
+    @if $style ==add-to-cart {
+        background-color: $gray5;
+        min-height: 33px;
+        font-size: 14px;
+        line-height: 17px;
+        color: $black;
+
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            background-color: $gray5;
+        }
+    }
+
+    
+
+    @if $style ==outline-primary {        
+        border:1px solid $primary;
+        color:$primary;
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            background-color: $primary;
+            border-color: $primary; 
+            color: $white;
+        }
+    }
+    @if $style ==outline-secondary {        
+        border:1px solid $secondary;
+        color:$secondary;
+        background-color: transparent;
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            background-color: $darksecondary;
+            border-color: $secondary; 
+            color: $white;
+        }
+    }
+    @if $style ==disabled {        
+        border:1px solid $gray1;
+        color:$gray1;
+        background-color: $ghostWhite;
+        cursor: not-allowed;
+        &:hover, &:active, &:not(:disabled):not(.disabled):active   {
+            border:1px solid $gray1;
+            color:$gray1;
+            background-color: $ghostWhite;
+            cursor: not-allowed;
+        }
+    }
+
+    &:focus,
+    &:active {
+        box-shadow: none;
+        outline: none;
+    }
+
+    &:not(:disabled):not(.disabled):active:focus {
+        box-shadow: none;
+    }
+}
