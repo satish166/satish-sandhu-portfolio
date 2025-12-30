@@ -1,7 +1,8 @@
-@use '../../../styles/components/variables' as vars;
+@use '../../../styles/components/variables' as *;
 
 .main-banner {
     position: relative;
+
     &::before {
         content: "";
         background: color-mix(in srgb, #040b14, transparent 70%);
@@ -20,53 +21,61 @@
 
     .banner-content {
         position: absolute;
-        left: 50px;
         top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 11;
-        color: #ffffff;
+        color: $white;
+       
         .cursor {
             position: relative;
-            width: 24em;
+            width: auto !important;
+            display: inline-block;
             margin: 0 auto;
             border-right: 2px solid rgba(255, 255, 255, .75);
             font-size: 30px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
-            transform: translateY(-50%);
+
             &.typewriter-animation {
                 animation: typewriter 3s steps(50) 0.5s 1 normal both,
                     blinkingCursor 500ms steps(50) infinite normal;
             }
+
             @keyframes typewriter {
                 from {
                     width: 0;
                 }
-    
+
                 to {
                     width: 100%;
                 }
             }
-    
+
             @keyframes blinkingCursor {
                 from {
                     border-right-color: rgba(255, 255, 255, .75);
                 }
-    
+
                 to {
                     border-right-color: transparent;
                 }
             }
         }
+
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-transform: uppercase;
             font-size: 70px;
             font-weight: 700;
+             color: $white;
         }
-        h6 {
+
+        h3 {
+            color: $white;
             letter-spacing: 8px;
-            text-decoration: underline;
+            text-decoration: underline; 
             text-underline-offset: 5px;
         }
 
