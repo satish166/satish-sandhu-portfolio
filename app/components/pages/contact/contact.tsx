@@ -29,7 +29,7 @@ export default function Contact() {
                     <Image  src={Phone} alt="Hero" className="h-auto contact-us-icons" />
                      <div className="">
                         <h6>Call Us</h6>
-                        <p><a href="tel:8278860269">8278860269</a></p>
+                        <p><a target="_blank" href="tel:8278860269">8278860269</a></p>
 
                      </div>
                   </li>
@@ -44,12 +44,12 @@ export default function Contact() {
 
                   <ul className="social-links">
                     <li>
-                      <a href="">
+                      <a target="_blank" href="https://www.linkedin.com/in/satish-kumar-89250a214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
                        <Image  src={Linkdin} alt="Hero" className="h-auto contact-us-icons" />
                       </a>
                     </li>
                     <li> 
-                      <a href="https://wa.me/8278860269">
+                      <a target="_blank" href="https://wa.me/8278860269">
                         <Image  src={Whatsapp} alt="Hero" className="h-auto contact-us-icons" />
                       </a>
                     </li>
@@ -81,7 +81,7 @@ export default function Contact() {
                                 </textarea>
                               </div>
                               <div className="field">
-                              <button className="button button-primary" type="submit">Send Message</button>
+                              <a target="_blank" href="mailto:sandhusatish166@gmail.com" className="button button-primary" >Send Message</a>
                               </div>
 
                           </form>
