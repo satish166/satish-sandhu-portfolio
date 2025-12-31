@@ -46,7 +46,7 @@ export default function SideBar() {
                 <a href="#liveprojects"><FontAwesomeIcon icon={faLaptopCode} /> Live Projects</a>
               </li>
               <li>
-                <a href="#personalprojects"><FontAwesomeIcon icon={faAddressBook} /> Personal Projects</a>
+                <a href="#personalprojects"><FontAwesomeIcon icon={faLaptopCode} /> Personal Projects</a>
               </li>
               <li>
                 <a href="#contactus"><FontAwesomeIcon icon={faAddressBook} /> Contact</a>
