@@ -1,18 +1,19 @@
-@import '../../styles/components/variables';
+@use '../../styles/components/variables' as *;
 
 
 .sidebar-section {
     max-width: 250px;
     width: 100%;
-    background-color: #000000;
+    background-color: $black;
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
+    z-index: 999;
 
     p,
     h4 {
-        color: $white;
+        color: white;
     }
 
     .sidebar-content {
@@ -49,7 +50,7 @@
                 gap: 20px;
 
                 &:hover {
-                    color: $white;
+                    color: white;
 
                     svg {
                         color: $primary;

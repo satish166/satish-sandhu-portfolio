@@ -1,6 +1,9 @@
-@import './components/fonts';
-@import './components/variables';
-@import './components/mixin';
-@import './components/typography';
-@import './components/formfield';
-@import './components/common';
+
+/* app/styles/_index.scss */
+@forward './components/fonts';
+@forward './components/variables';
+@forward './components/mixin';
+@forward './components/typography';
+@forward './components/formfield';
+@forward './components/common';
+@forward './components/helperclasses';

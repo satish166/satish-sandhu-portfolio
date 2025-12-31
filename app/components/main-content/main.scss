@@ -1,65 +1,19 @@
-@import '../../styles/components/variables';
+@use '../../styles/components/mixin' as *;
+@use '../../styles/components/variables' as *;
 
+.page-layout {
 
-.sidebar-section {
-    max-width: 250px;
-    width: 100%;
-    background-color: #000000;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    p,
-    h4 {
-        color: $white;
-    }
-
-    .sidebar-content {
-        margin-top: 20px;
-        .profile-image {
-            max-width: 140px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: auto;
-            border: 6px solid #6464648c;
+    .main-content {
+        @include media-breakpoint-down-lg {
+            flex: none;
+            width: 100%;
         }
 
-        .profile-name {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .social-icons {}
-    }
-
-    .sidebar-menu {
-
-        ul {
-            list-style: none;
-            padding-left: 20px;
-
-            a {
-                font-size: 16px;
-                font-weight: 400;
-                padding: 15px 10px;
-                color: $gray;
-                display: flex;
-                align-items: center;
-                gap: 20px;
-
-                &:hover {
-                    color: $white;
-
-                    svg {
-                        color: $primary;
-                    }
-                }
-
-                svg {
-                    max-width: 20px;
-                }
-            }
+        .toggle-button {
+            position: fixed;
+            right: 20px;
+            z-index: 99999;
+            top: 20px;
         }
     }
 }

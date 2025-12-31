@@ -11,15 +11,15 @@ import { faHouse, faUser, faFile, faAddressBook, faLaptopCode  } from "@fortawes
 export default function MainBanner() {
   return (
     <>
-      <div className="main-banner">
+      <section className="main-banner">
            <div className="banner-image">
                 <Image src={MyImage} alt="Hero" className="" />
            </div>
-           <div className="banner-content">
+           <div className="container banner-content">
               <h1>Satish Kumar</h1>
-              <h6 className="cursor typewriter-animation">I'm Frontend Developer</h6>
+              <h3 className="cursor typewriter-animation">I'm Frontend Developer</h3>
            </div>
-      </div>
+      </section>
     </>
   );
 }

@@ -1,0 +1,62 @@
+@use './variables' as *;
+@use './mixin' as *;
+
+.button {
+    @include button;
+
+    &-primary {
+        @include button(primary);
+    }
+
+    &-secondary {
+        @include button(secondary);
+    }
+
+    &-light-green {
+        @include button(light-green);
+    }
+
+    &-outline-primary {
+        @include button(outline-primary);
+    }
+
+    &-outline-secondary {
+        @include button(outline-secondary);
+    }
+
+    &-disabled {
+        @include button(disabled);
+    }
+
+    &-add-to-cart {
+        @include button(add-to-cart);
+    }
+
+    &-outline-red {
+        @include button(outline-red);
+    }
+}
+
+
+
+.heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: $primary;
+        left: 0;
+        bottom: 0;
+    }
+}
+
+.font-semibold {
+    font-weight: 600;
+}
