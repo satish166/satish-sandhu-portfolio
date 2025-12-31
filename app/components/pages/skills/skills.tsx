@@ -15,11 +15,11 @@ import { faHtml5, faCss3Alt, faSass, faJs, faReact, faWordpress, faFigma, faGith
 export default function Skills() {
   return (
     <>
-      <section className="skill-section">
+      <section className="skill-section" id="skills">
         <div className="skills-content container">
           <h2 className="heading">Skill & Expertise</h2>
           <div className="row">
-            <div className="col-lg-4">
+            <div className="col-xl-4">
               <div className="skill-box">
                 <h3>Frontend Development</h3>
                 <ul className="skill-list">
@@ -64,7 +64,7 @@ export default function Skills() {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-xl-4">
               <div className="skill-box">
                 <h3>CMS Tools</h3>
                 <ul className="skill-list">
@@ -83,7 +83,7 @@ export default function Skills() {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-xl-4">
               <div className="skill-box">
                 <h3>Other Tools</h3>
                 <ul className="skill-list">

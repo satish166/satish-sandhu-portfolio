@@ -10,10 +10,10 @@ import Whatsapp from "../../../assets/images/whatsapp.svg";
 export default function Contact() {
   return (
     <>
-      <section className="contact-section">
+      <section className="contact-section" id="contactus">
         <div className="work-content container">
             <div className="row">
-              <div className="left-section col-md-5">
+              <div className="left-section col-lg-5">
                 <h2 className="heading">Contact Us
               </h2>
               <div className="contact-us">
@@ -56,12 +56,12 @@ export default function Contact() {
                   </ul>
               </div>
               </div>
-              <div className="right-section col-md-12">
+              <div className="right-section col-lg-12">
                 <div className="row">
-                  <div className="col-md-5 d-none d-lg-block">
+                  <div className="col-xl-5 d-none d-lg-block">
     
                   </div>
-                  <div className="col-lg-7">
+                  <div className="col-xl-7">
                     <div className="get-in-touch">
                           <h2 className="heading">Let's Work Together</h2>
                           <p>Have a project in mind or want to collaborate? I'm just a message away</p>

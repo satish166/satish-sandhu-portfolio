@@ -32,21 +32,24 @@ export default function SideBar() {
           </div>
 
           <div className="sidebar-menu">
-            <ul>
+              <ul>
               <li>
-                <a href="#yoko"><FontAwesomeIcon icon={faHouse} />  Home</a>
+                <a href="#home"><FontAwesomeIcon icon={faHouse} />  Home</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faUser} /> About</a>
+                <a href="#about"><FontAwesomeIcon icon={faUser} /> About</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faFile} /> Resume</a>
+                <a href="#skills"><FontAwesomeIcon icon={faFile} /> Skills</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faLaptopCode} /> Work</a>
+                <a href="#liveprojects"><FontAwesomeIcon icon={faLaptopCode} /> Live Projects</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faAddressBook} /> Contact</a>
+                <a href="#personalprojects"><FontAwesomeIcon icon={faAddressBook} /> Personal Projects</a>
+              </li>
+              <li>
+                <a href="#contactus"><FontAwesomeIcon icon={faAddressBook} /> Contact</a>
               </li>
 
             </ul>
@@ -79,19 +82,22 @@ export default function SideBar() {
           <div className="sidebar-menu">
             <ul>
               <li>
-                <a href="#yoko"><FontAwesomeIcon icon={faHouse} />  Home</a>
+                <a href="#home"><FontAwesomeIcon icon={faHouse} />  Home</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faUser} /> About</a>
+                <a href="#about"><FontAwesomeIcon icon={faUser} /> About</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faFile} /> Resume</a>
+                <a href="#skills"><FontAwesomeIcon icon={faFile} /> Skills</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faLaptopCode} /> Work</a>
+                <a href="#liveprojects"><FontAwesomeIcon icon={faLaptopCode} /> Live Projects</a>
               </li>
               <li>
-                <a href="#"><FontAwesomeIcon icon={faAddressBook} /> Contact</a>
+                <a href="#personalprojects"><FontAwesomeIcon icon={faAddressBook} /> Personal Projects</a>
+              </li>
+              <li>
+                <a href="#contactus"><FontAwesomeIcon icon={faAddressBook} /> Contact</a>
               </li>
 
             </ul>

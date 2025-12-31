@@ -1,16 +1,28 @@
 @use '../../../styles/components/variables' as *;
+@use '../../../styles/components/mixin' as *;
 
 .about-section {
     margin-top: 50px;
+
     .personal-info {
         margin-block: 50px;
+
         ul {
             margin-top: 40px;
             column-count: 2;
+
+            @include media-breakpoint-down-lg {
+                column-count: auto;
+            }
+
             li {
                 display: flex;
                 gap: 20px;
                 margin-bottom: 20px;
+
+                @include media-breakpoint-down-lg {
+                    justify-content: space-between;
+                }
             }
         }
     }

@@ -30,7 +30,7 @@
         transform: translate(-50%, -50%);
         z-index: 11;
         color: $white;
-       
+        
         .cursor {
             position: relative;
             width: auto !important;
@@ -74,6 +74,9 @@
             font-size: 70px;
             font-weight: 700;
              color: $white;
+             @include media-breakpoint-down-lg {
+                font-size: 30px;
+             }
         }
 
         h3 {
@@ -81,6 +84,9 @@
             letter-spacing: 8px;
             text-decoration: underline; 
             text-underline-offset: 5px;
+             @include media-breakpoint-down-lg {
+                font-size: 12px !important;
+             }
         }
 
 
