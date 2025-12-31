@@ -1,6 +1,6 @@
 @use '../../../styles/components/variables' as *;
 
-.work-section {
+.personal-section {
     padding-block: 50px;
 
     .row {
@@ -10,6 +10,19 @@
     .work-content {
         h6 {
             margin-bottom: 40px;
+        }
+
+        .carousel {
+            .carousel-inner {
+                max-width: 90%;
+                margin: auto;
+            }
+            .carousel-control-prev, .carousel-control-next {
+                width: 5%;
+                span {
+                    filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(9%) hue-rotate(190deg) brightness(96%) contrast(102%);
+                }
+            }
         }
 
         .work-box {

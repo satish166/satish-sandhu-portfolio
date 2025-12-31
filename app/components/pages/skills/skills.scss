@@ -3,7 +3,9 @@
 .skill-section {
     padding-block: 50px;
     background-color: $gray420;
-
+    .row {
+        gap: 15px 0;
+    }
     .skill-box {
         border: 1px solid $black;
         padding: 15px;
