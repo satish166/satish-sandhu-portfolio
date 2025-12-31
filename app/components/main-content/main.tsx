@@ -7,7 +7,7 @@ import MyImage from "../../assets/images/my-profile-img.jpg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faHouse, faUser, faFile, faAddressBook, faLaptopCode } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import MainBanner from "../pages/main-banner/banner";
 import About from "../pages/about/about";
 import Skills from "../pages/skills/skills";
@@ -19,7 +19,7 @@ export default function MainContent() {
     <>
       <div className="main-content">
         <button className="btn btn-primary d-lg-none toggle-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-          Button with data-bs-target
+          <FontAwesomeIcon icon={faBars} />
         </button>
         <MainBanner></MainBanner>
         <About></About>

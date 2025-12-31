@@ -10,7 +10,7 @@ import poppin from "../../../assets/images/poppin.png";
 export default function Work() {
   return (
     <>
-      <section className="work-section">
+      <section className="work-section" id="liveprojects">
         <div className="work-content container">
           <h2 className="heading">Live Projects</h2>
           <h6 className="">A showcase of projects that blend creativity with functionality.</h6>

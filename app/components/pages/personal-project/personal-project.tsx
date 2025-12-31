@@ -8,7 +8,7 @@ import poppin from "../../../assets/images/poppin.png";
 export default function PersonalProject() {
   return (
     <>
-      <section className="personal-section">
+      <section className="personal-section" id="personalprojects">
         {/* <div className="work-content container">
           <h2 className="heading">Personal Project</h2>
           <h6 className="">A showcase of projects that blend creativity with functionality.</h6>

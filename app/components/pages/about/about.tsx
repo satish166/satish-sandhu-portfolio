@@ -8,7 +8,7 @@ import MyImage from "../../../assets/images/my-profile-img.jpg";
 export default function About() {
   return (
     <>
-      <section className="container about-section">
+      <section className="container about-section" id="about">
            <div className="about-content">
               <h2 className="heading">About</h2>
               <h6 className="">I am a Frontend Developer with 5 years of experience in building scalable, high-performance, and user-centric web applications. I specialize in React, Angular, Next.js, and Salesforce Commerce Cloud (SFCC), with strong expertise in modern styling solutions like SCSS and Tailwind CSS. I focus on writing clean, maintainable code and creating seamless user experiences across devices.</h6>

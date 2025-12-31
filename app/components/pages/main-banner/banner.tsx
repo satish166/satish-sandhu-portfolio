@@ -11,7 +11,7 @@ import { faHouse, faUser, faFile, faAddressBook, faLaptopCode  } from "@fortawes
 export default function MainBanner() {
   return (
     <>
-      <section className="main-banner">
+      <section className="main-banner" id="home">
            <div className="banner-image">
                 <Image src={MyImage} alt="Hero" className="" />
            </div>
