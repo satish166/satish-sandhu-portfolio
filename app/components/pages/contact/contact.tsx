@@ -58,10 +58,10 @@ export default function Contact() {
               </div>
               <div className="right-section col-md-12">
                 <div className="row">
-                  <div className="col-md-5">
+                  <div className="col-md-5 d-none d-lg-block">
     
                   </div>
-                  <div className="col-md-7">
+                  <div className="col-lg-7">
                     <div className="get-in-touch">
                           <h2 className="heading">Let's Work Together</h2>
                           <p>Have a project in mind or want to collaborate? I'm just a message away</p>
