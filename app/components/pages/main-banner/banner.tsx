@@ -8,7 +8,9 @@ import MyImage from "../../../assets/images/hero-bg.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faHouse, faUser, faFile, faAddressBook, faLaptopCode  } from "@fortawesome/free-solid-svg-icons";
+import DownloadResumeButton from "../../DownloadResumeButton";
 export default function MainBanner() {
+  
   return (
     <>
       <section className="main-banner" id="home">
@@ -18,6 +20,10 @@ export default function MainBanner() {
            <div className="container banner-content">
               <h1>Satish Kumar</h1>
               <h3 className="cursor typewriter-animation">I'm Frontend Developer</h3>
+              <div className="download-resume mt-3">
+                <DownloadResumeButton />
+              </div>
+
            </div>
       </section>
     </>
