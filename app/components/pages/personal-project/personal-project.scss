@@ -17,8 +17,11 @@
                 max-width: 90%;
                 margin: auto;
             }
-            .carousel-control-prev, .carousel-control-next {
+
+            .carousel-control-prev,
+            .carousel-control-next {
                 width: 5%;
+
                 span {
                     filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(9%) hue-rotate(190deg) brightness(96%) contrast(102%);
                 }
@@ -62,6 +65,8 @@
                 overflow: hidden;
                 border: 1px solid $gray2;
                 transition: 0.5s;
+                max-height: 230px;
+                max-width: 549px;
 
                 .visit-text {
                     position: absolute;
