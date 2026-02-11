@@ -3,6 +3,7 @@ import Image from "next/image";
 import starfurniture from "../../../assets/images/star-furniture.png";
 import kimball from "../../../assets/images/kimball.png";
 import poppin from "../../../assets/images/poppin.png";
+import gymBanner from "../../../assets/images/gym-project-banner.png";
 
 
 export default function PersonalProject() {
@@ -79,14 +80,50 @@ export default function PersonalProject() {
 
           </div>
         </div> */}
-        
+
         <div className="work-content container">
-             <h2 className="heading">Personal Project</h2>
+          <h2 className="heading">Personal Project</h2>
           <h6 className="">A showcase of projects that blend creativity with functionality.</h6>
           <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-           
+
             <div className="carousel-inner">
               <div className="carousel-item active">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="work-box">
+                      <a className="visit-site" href="https://gym-project-six-theta.vercel.app/" target="_blank">
+                        <Image src={gymBanner} alt="Poppins" className="h-auto" />
+                        <div className="visit-text">
+                          <p>Visit site</p>
+                        </div>
+                      </a>
+                      <div className="about-project">
+                        <h4>GYM Fitness</h4>
+                        <p>Gym fitness is a modern lifestyle movement focused on empowering individuals to build stronger, healthier, and more confident versions of themselves. Whether it’s lifting weights, running on a treadmill, or practicing functional workouts, gym fitness aims to transform routines into energizing experiences that help people push limits, improve well‑being, and feel their best both inside and outside the gym.  </p>
+                        <a href="https://gym-project-six-theta.vercel.app/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="work-box">
+                      <a className="visit-site" href="https://www.poppin.com/" target="_blank">
+                        <Image src={poppin} alt="Poppins" className="h-auto" />
+                        <div className="visit-text">
+                          <p>Visit site</p>
+                        </div>
+                      </a>
+                      <div className="about-project">
+                        <h4>Poppins (Salesforce)</h4>
+                        <p>Poppin is a modern design-driven company based in New York City that aims to reimagine everyday workspaces by creating well-designed office products and furniture that help people “work happy.” The company started by asking a simple question: what if common office tools like staplers were reimagined in a way that was both functional and visually inspiring? From that idea, Poppin was born with a mission to make work more enjoyable through innovative, colorful, and thoughtfully designed products.</p>
+                        <a href="https://www.poppin.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
                 <div className="row">
                   <div className="col-md-6">
                     <div className="work-box">
@@ -123,43 +160,7 @@ export default function PersonalProject() {
                 </div>
               </div>
               <div className="carousel-item">
-               <div className="row">
-                  <div className="col-md-6">
-                    <div className="work-box">
-                      <a className="visit-site" href="https://www.poppin.com/" target="_blank">
-                        <Image src={poppin} alt="Poppins" className="h-auto" />
-                        <div className="visit-text">
-                          <p>Visit site</p>
-                        </div>
-                      </a>
-                      <div className="about-project">
-                        <h4>Poppins (Salesforce)</h4>
-                        <p>Poppin is a modern design-driven company based in New York City that aims to reimagine everyday workspaces by creating well-designed office products and furniture that help people “work happy.” The company started by asking a simple question: what if common office tools like staplers were reimagined in a way that was both functional and visually inspiring? From that idea, Poppin was born with a mission to make work more enjoyable through innovative, colorful, and thoughtfully designed products.</p>
-                        <a href="https://www.poppin.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="work-box">
-                      <a className="visit-site" href="https://www.poppin.com/" target="_blank">
-                        <Image src={poppin} alt="Poppins" className="h-auto" />
-                        <div className="visit-text">
-                          <p>Visit site</p>
-                        </div>
-                      </a>
-                      <div className="about-project">
-                        <h4>Poppins (Salesforce)</h4>
-                        <p>Poppin is a modern design-driven company based in New York City that aims to reimagine everyday workspaces by creating well-designed office products and furniture that help people “work happy.” The company started by asking a simple question: what if common office tools like staplers were reimagined in a way that was both functional and visually inspiring? From that idea, Poppin was born with a mission to make work more enjoyable through innovative, colorful, and thoughtfully designed products.</p>
-                        <a href="https://www.poppin.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="carousel-item">
-                 <div className="row">
+                <div className="row">
                   <div className="col-md-6">
                     <div className="work-box">
                       <a className="visit-site" href="https://www.poppin.com/" target="_blank">
