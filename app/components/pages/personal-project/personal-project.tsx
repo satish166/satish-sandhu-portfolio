@@ -3,6 +3,7 @@ import Image from "next/image";
 import starfurniture from "../../../assets/images/star-furniture.png";
 import kimball from "../../../assets/images/kimball.png";
 import poppin from "../../../assets/images/poppin.png";
+import LearningImage from "../../../assets/images/e-learning-image.png";
 import gymBanner from "../../../assets/images/gym-project-banner.png";
 
 
@@ -107,16 +108,16 @@ export default function PersonalProject() {
                   </div>
                   <div className="col-md-6">
                     <div className="work-box">
-                      <a className="visit-site" href="https://www.poppin.com/" target="_blank">
-                        <Image src={poppin} alt="Poppins" className="h-auto" />
+                      <a className="visit-site" href="https://e-learning-sk.vercel.app/" target="_blank">
+                        <Image src={LearningImage} alt="E-Learning" className="h-auto" />
                         <div className="visit-text">
                           <p>Visit site</p>
                         </div>
                       </a>
                       <div className="about-project">
-                        <h4>Poppins (Salesforce)</h4>
-                        <p>Poppin is a modern design-driven company based in New York City that aims to reimagine everyday workspaces by creating well-designed office products and furniture that help people “work happy.” The company started by asking a simple question: what if common office tools like staplers were reimagined in a way that was both functional and visually inspiring? From that idea, Poppin was born with a mission to make work more enjoyable through innovative, colorful, and thoughtfully designed products.</p>
-                        <a href="https://www.poppin.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
+                        <h4>E-Learning Platform</h4>
+                        <p>An e-learning platform designed to provide accessible and engaging educational content for learners of all levels. The platform features interactive courses, progress tracking, and a user-friendly interface that makes learning enjoyable and effective. The platform features interactive courses, progress tracking, and a user-friendly interface that makes learning enjoyable and effective.</p>
+                        <a href="https://e-learning-sk.vercel.app/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
                       </div>
 
                     </div>
