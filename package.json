@@ -20,7 +20,9 @@
     "next": "16.0.10",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "sass": "^1.94.2"
+    "react-slick": "^0.31.0",
+    "sass": "^1.94.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -29,6 +31,7 @@
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-slick": "^0.23.13",
     "eslint": "^9",
     "eslint-config-next": "16.0.6",
     "tailwindcss": "^4",

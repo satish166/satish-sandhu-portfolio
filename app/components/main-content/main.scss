@@ -4,7 +4,7 @@
 .page-layout {
 
     .main-content {
-        @include media-breakpoint-down-lg {
+        @include media-breakpoint-down-xxl {
             flex: none;
             width: 100%;
         }

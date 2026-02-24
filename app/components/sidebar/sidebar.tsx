@@ -11,7 +11,7 @@ import { faHouse, faUser, faFile, faAddressBook, faLaptopCode } from "@fortaweso
 export default function SideBar() {
   return (
     <>
-      <div className="sidebar-section d-none d-lg-block">
+      <div className="sidebar-section d-none d-xxl-block">
         <div className="">
           <div className="sidebar-content">
             <div className="profile-image">
@@ -59,7 +59,7 @@ export default function SideBar() {
         </div>
 
       </div>
-       <div className="sidebar-section offcanvas offcanvas-start d-lg-none"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+       <div className="sidebar-section offcanvas offcanvas-start d-xxl-none"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div className="">
           <div className="sidebar-content">
             <div className="profile-image">

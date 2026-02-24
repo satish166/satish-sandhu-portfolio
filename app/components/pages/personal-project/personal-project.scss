@@ -12,21 +12,6 @@
             margin-bottom: 40px;
         }
 
-        .carousel {
-            .carousel-inner {
-                max-width: 90%;
-                margin: auto;
-            }
-
-            .carousel-control-prev,
-            .carousel-control-next {
-                width: 5%;
-
-                span {
-                    filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(9%) hue-rotate(190deg) brightness(96%) contrast(102%);
-                }
-            }
-        }
 
         .work-box {
             padding: 10px;
@@ -65,8 +50,7 @@
                 overflow: hidden;
                 border: 1px solid $gray2;
                 transition: 0.5s;
-                max-height: 230px;
-                max-width: 549px;
+                max-width: 100%;
 
                 .visit-text {
                     position: absolute;
@@ -102,6 +86,32 @@
                         }
                     }
                 }
+            }
+        }
+        .slider-container {
+            overflow: hidden;
+        }
+    }
+    .slide-card {
+        padding-inline: 10px;
+    }
+
+    .dots {
+        text-align: center;
+        margin-top: 20px;
+
+        .dot {
+            position: relative;
+            display: inline-block;
+            margin: 0 5px;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #CCCCCC;
+            transition: .5s;
+
+            &.active {
+                background-color: $primary;
+                border-color: $primary;
             }
         }
     }
