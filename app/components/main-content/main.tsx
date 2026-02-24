@@ -18,7 +18,7 @@ export default function MainContent() {
   return (
     <>
       <div className="main-content">
-        <button className="btn btn-primary d-lg-none toggle-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <button className="btn btn-primary d-xxl-none toggle-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
           <FontAwesomeIcon icon={faBars} />
         </button>
         <MainBanner></MainBanner>

@@ -93,11 +93,12 @@
             border-radius: 10px;
             background: $white;
             padding: 20px;
-            max-width: 100%;
+            max-width: calc(100% - 80px);
             margin-left: 80px;
             height: 100%;
              @include media-breakpoint-down-xl {
               margin-left: 0;
+              max-width: calc(100% - 0px);
             }
             .get-in-touch {
                 padding-block: 20px;
