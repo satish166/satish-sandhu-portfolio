@@ -10,13 +10,13 @@ import Whatsapp from "../../../assets/images/whatsapp.svg";
 export default function Contact() {
   return (
     <>
-      <section className="contact-section" id="contactus">
+      <section className="contact-section" id="contactus" data-aos="fade-up" data-aos-delay="500">
         <div className="work-content container">
             <div className="row">
               <div className="left-section col-lg-5">
                 <h2 className="heading">Contact Us
               </h2>
-              <div className="contact-us">
+              <div className="contact-us" data-aos="fade-right">
                 <ul>
                   <li className="list-item">
                      <Image  src={Address} alt="Hero" className="h-auto contact-us-icons" />
@@ -62,7 +62,7 @@ export default function Contact() {
     
                   </div>
                   <div className="col-xl-7">
-                    <div className="get-in-touch">
+                    <div className="get-in-touch" data-aos="fade-left" data-aos-delay="500">
                           <h2 className="heading">Let's Work Together</h2>
                           <p>Have a project in mind or want to collaborate? I'm just a message away</p>
                           <form action="" method="get">

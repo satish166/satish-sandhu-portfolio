@@ -8,19 +8,19 @@ import MyImage from "../../../assets/images/my-profile-img.jpg";
 export default function About() {
   return (
     <>
-      <section className="container about-section" id="about">
+      <section className="container about-section" id="about" data-aos="fade-up" data-aos-delay="200">
            <div className="about-content">
-              <h2 className="heading">About</h2>
-              <h6 className="">I am a Frontend Developer with 5 years of experience in building scalable, high-performance, and user-centric web applications. I specialize in React, Angular, Next.js, and Salesforce Commerce Cloud (SFCC), with strong expertise in modern styling solutions like SCSS and Tailwind CSS. I focus on writing clean, maintainable code and creating seamless user experiences across devices.</h6>
+              <h2 className="heading"  data-aos="fade-right">About</h2>
+              <h6 className="" data-aos="fade-right">I am a Frontend Developer with 5 years of experience in building scalable, high-performance, and user-centric web applications. I specialize in React, Angular, Next.js, and Salesforce Commerce Cloud (SFCC), with strong expertise in modern styling solutions like SCSS and Tailwind CSS. I focus on writing clean, maintainable code and creating seamless user experiences across devices.</h6>
            </div>
             <div className="personal-info">
            <div className="row align-items-center">
-            <div className="col-md-4">
+            <div className="col-md-4" data-aos="fade-right">
                <div className="about-image">
                 <Image src={MyImage} alt="s" className="h-auto" />
                </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-8" data-aos="fade-left">
               <h3>UI/UX Designer & Web Developer.</h3>
               <div className="prsonal-details">
                 <ul>
