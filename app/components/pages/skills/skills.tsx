@@ -15,7 +15,7 @@ import { faHtml5, faCss3Alt, faSass, faJs, faReact, faWordpress, faFigma, faGith
 export default function Skills() {
   return (
     <>
-      <section className="skill-section" id="skills">
+      <section className="skill-section" id="skills" data-aos="fade-up">
         <div className="skills-content container">
           <h2 className="heading">Skill & Expertise</h2>
           <div className="row">

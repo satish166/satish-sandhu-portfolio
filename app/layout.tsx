@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import BootstrapClient from "./bootstrap.client";
 
+import AOSWrapper from "./components/AOSWrapper";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.scss";
 
@@ -33,8 +35,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
   <BootstrapClient />
-
+     <AOSWrapper>
         {children}
+     </AOSWrapper>
       </body>
     </html>
   );

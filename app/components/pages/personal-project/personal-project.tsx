@@ -79,7 +79,7 @@ export default function PersonalProject() {
 
   return (
     <>
-      <section className="personal-section" id="personalprojects">
+      <section className="personal-section" id="personalprojects" data-aos="fade-up">
         <div className="work-content container">
           <h2 className="heading">Personal Project</h2>
           <h6 className="">A showcase of projects that blend creativity with functionality.</h6>
@@ -100,7 +100,7 @@ export default function PersonalProject() {
                                   <p>{item.btnText}</p>
                                 </div>
                               </a>
-                              <div className="about-project">
+                              <div className="about-project" >
                                 <h4>{item.projectName}</h4>
                                 <p>{item.paragraph}</p>
                                 <a href={item.btnAction} target="_blank" className="button button-outline-primary my-2">{item.btnText}</a>
