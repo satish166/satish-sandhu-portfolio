@@ -11,6 +11,7 @@ import kimball from "../../../assets/images/kimball.png";
 import poppin from "../../../assets/images/poppin.png";
 import LearningImage from "../../../assets/images/e-learning-image.png";
 import gymBanner from "../../../assets/images/gym-project-banner.png";
+import WeddingInvitation from "../../../assets/images/wedding-pic.png";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,6 +42,15 @@ export default function PersonalProject() {
         paragraph:
           "An e-learning platform designed to provide accessible and engaging educational content for learners of all levels. The platform features interactive courses, progress tracking, and a user-friendly interface that makes learning enjoyable and effective. The platform features interactive courses, progress tracking, and a user-friendly interface that makes learning enjoyable and effective.",
       },
+      {
+        id: 3,
+        projectName: "Wedding Invitation",
+        image: WeddingInvitation,
+        btnText: "Visit Wedding Invitation",
+        btnAction: "https://wedding-invitation-flax-omega.vercel.app/",
+        paragraph:
+          "A joyful occasion designed to honor love, unity, and the beginning of a beautiful journey together. The celebration includes heartfelt rituals, shared laughter, and an inviting ambience that makes every moment memorable, uplifting, and filled with blessings for all who join us on this special day.",
+      }
      
     ],
     []
