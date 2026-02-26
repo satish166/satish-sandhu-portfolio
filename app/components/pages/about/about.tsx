@@ -8,7 +8,7 @@ import MyImage from "../../../assets/images/my-profile-img.jpg";
 export default function About() {
   return (
     <>
-      <section className="container about-section" id="about" data-aos="fade-up" data-aos-delay="200">
+      <section className="container about-section overflow-hidden" id="about" data-aos="fade-up" data-aos-delay="200">
            <div className="about-content">
               <h2 className="heading"  data-aos="fade-right">About</h2>
               <h6 className="" data-aos="fade-right">I am a Frontend Developer with 5 years of experience in building scalable, high-performance, and user-centric web applications. I specialize in React, Angular, Next.js, and Salesforce Commerce Cloud (SFCC), with strong expertise in modern styling solutions like SCSS and Tailwind CSS. I focus on writing clean, maintainable code and creating seamless user experiences across devices.</h6>

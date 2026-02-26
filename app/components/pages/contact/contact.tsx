@@ -10,7 +10,7 @@ import Whatsapp from "../../../assets/images/whatsapp.svg";
 export default function Contact() {
   return (
     <>
-      <section className="contact-section" id="contactus" data-aos="fade-up" data-aos-delay="500">
+      <section className="contact-section overflow-hidden" id="contactus" data-aos="fade-up" data-aos-delay="300">
         <div className="work-content container">
             <div className="row">
               <div className="left-section col-lg-5">
