@@ -4,10 +4,6 @@ import "./banner.scss";
 import Image from "next/image";
 
 import MyImage from "../../../assets/images/hero-bg.jpg";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faHouse, faUser, faFile, faAddressBook, faLaptopCode  } from "@fortawesome/free-solid-svg-icons";
 import DownloadResumeButton from "../../DownloadResumeButton";
 export default function MainBanner() {
   
