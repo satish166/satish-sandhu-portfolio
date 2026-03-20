@@ -36,8 +36,8 @@ export default function Contact() {
                   <li className="list-item">
                     <Image  src={Mail} alt="Hero" className="h-auto contact-us-icons" />
                      <div className="">
-                        <h6>Address</h6>
-                        <p>Una (H.P)</p>
+                        <h6>Email</h6>
+                        <a href="mailto:sandhusatish166@gmail.com">sandhusatish166@gmail.com</a>
                      </div>
                   </li>
                 </ul>
