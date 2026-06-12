@@ -37,7 +37,8 @@ const getProjectTechTags = (name: string): string[] => {
 
 export default function Work({ projects }: WorkProps) {
   const list = projects || [];
-  const sliderRef = useRef<Slider>(null);
+  const desktopSliderRef = useRef<Slider>(null);
+  const mobileSliderRef = useRef<Slider>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function Work({ projects }: WorkProps) {
 
   if (list.length === 0) return null;
 
-  const settings = {
+  const desktopSettings = {
     dots: true,
     infinite: list.length > 2,
     speed: 500,
@@ -56,15 +57,18 @@ export default function Work({ projects }: WorkProps) {
     draggable: true,
     swipe: true,
     swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
+  };
+
+  const mobileSettings = {
+    dots: true,
+    infinite: list.length > 1,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    draggable: true,
+    swipe: true,
+    swipeToSlide: true,
   };
 
   // SSR / Hydration Fallback to prevent layout shifts & resolve Slick Slider responsiveness issues on actual devices
@@ -133,6 +137,55 @@ export default function Work({ projects }: WorkProps) {
     );
   }
 
+  const renderCard = (proj: ProjectItem) => (
+    <div className="project-card-wrapper">
+      <div className="browser-mockup glass-card">
+        {/* Browser Header / Title Bar */}
+        <div className="browser-header">
+          <div className="browser-dots">
+            <span className="dot red"></span>
+            <span className="dot yellow"></span>
+            <span className="dot green"></span>
+          </div>
+          <div className="browser-address-bar">
+            {proj.link.replace("https://", "").replace("www.", "").replace(/\/$/, "")}
+          </div>
+        </div>
+        
+        {/* Browser Window Body */}
+        <div className="browser-body">
+          <div className="image-overlay-container">
+            <img src={proj.image || "/uploads/poppin.png"} alt={proj.name} className="browser-image" />
+            <div className="browser-hover-overlay">
+              <a href={proj.link} target="_blank" rel="noopener noreferrer" className="explore-btn">
+                Visit Live Site
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Project Info Section */}
+        <div className="project-details">
+          <div className="tags-container">
+            {getProjectTechTags(proj.name).map((tag, i) => (
+              <span className="tech-badge" key={i}>{tag}</span>
+            ))}
+          </div>
+          <h3 className="project-title">{proj.name}</h3>
+          <p className="project-description">{proj.description}</p>
+          <div className="action-row">
+            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="live-link">
+              <span>Launch Live Site</span>
+              <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <section className="work-section overflow-hidden" id="liveprojects">
@@ -143,13 +196,13 @@ export default function Work({ projects }: WorkProps) {
               <h6 className="section-subheading mb-0">A showcase of production-ready web platforms that blend creativity with functionality.</h6>
             </div>
             
-            {/* Carousel Controls */}
+            {/* Carousel Controls - Desktop */}
             {list.length > 2 && (
-              <div className="carousel-controls-wrapper d-flex gap-2 mt-3 mt-md-0">
+              <div className="carousel-controls-wrapper d-none d-lg-flex gap-2 mt-3 mt-md-0">
                 <button 
                   className="ctrl-btn prev" 
                   type="button" 
-                  onClick={() => sliderRef.current?.slickPrev()} 
+                  onClick={() => desktopSliderRef.current?.slickPrev()} 
                   aria-label="Previous slide"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: '16px', height: '16px' }}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
@@ -157,7 +210,29 @@ export default function Work({ projects }: WorkProps) {
                 <button 
                   className="ctrl-btn next" 
                   type="button" 
-                  onClick={() => sliderRef.current?.slickNext()} 
+                  onClick={() => desktopSliderRef.current?.slickNext()} 
+                  aria-label="Next slide"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: '16px', height: '16px' }}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            )}
+
+            {/* Carousel Controls - Mobile */}
+            {list.length > 1 && (
+              <div className="carousel-controls-wrapper d-flex d-lg-none gap-2 mt-3 mt-md-0">
+                <button 
+                  className="ctrl-btn prev" 
+                  type="button" 
+                  onClick={() => mobileSliderRef.current?.slickPrev()} 
+                  aria-label="Previous slide"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: '16px', height: '16px' }}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button 
+                  className="ctrl-btn next" 
+                  type="button" 
+                  onClick={() => mobileSliderRef.current?.slickNext()} 
                   aria-label="Next slide"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: '16px', height: '16px' }}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
@@ -166,56 +241,23 @@ export default function Work({ projects }: WorkProps) {
             )}
           </div>
 
-          <div className="live-slider-container mt-4">
-            <Slider ref={sliderRef} {...settings}>
+          {/* Desktop Carousel (2 Slides) */}
+          <div className="live-slider-container mt-4 d-none d-lg-block">
+            <Slider ref={desktopSliderRef} {...desktopSettings}>
               {list.map((proj) => (
                 <div className="px-2 pb-3" key={proj.id}>
-                  <div className="project-card-wrapper">
-                    <div className="browser-mockup glass-card">
-                      {/* Browser Header / Title Bar */}
-                      <div className="browser-header">
-                        <div className="browser-dots">
-                          <span className="dot red"></span>
-                          <span className="dot yellow"></span>
-                          <span className="dot green"></span>
-                        </div>
-                        <div className="browser-address-bar">
-                          {proj.link.replace("https://", "").replace("www.", "").replace(/\/$/, "")}
-                        </div>
-                      </div>
-                      
-                      {/* Browser Window Body */}
-                      <div className="browser-body">
-                        <div className="image-overlay-container">
-                          <img src={proj.image || "/uploads/poppin.png"} alt={proj.name} className="browser-image" />
-                          <div className="browser-hover-overlay">
-                            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="explore-btn">
-                              Visit Live Site
-                            </a>
-                          </div>
-                        </div>
-                      </div>
+                  {renderCard(proj)}
+                </div>
+              ))}
+            </Slider>
+          </div>
 
-                      {/* Project Info Section */}
-                      <div className="project-details">
-                        <div className="tags-container">
-                          {getProjectTechTags(proj.name).map((tag, i) => (
-                            <span className="tech-badge" key={i}>{tag}</span>
-                          ))}
-                        </div>
-                        <h3 className="project-title">{proj.name}</h3>
-                        <p className="project-description">{proj.description}</p>
-                        <div className="action-row">
-                          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="live-link">
-                            <span>Launch Live Site</span>
-                            <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          {/* Mobile Carousel (1 Slide) */}
+          <div className="live-slider-container mt-4 d-block d-lg-none">
+            <Slider ref={mobileSliderRef} {...mobileSettings}>
+              {list.map((proj) => (
+                <div className="px-2 pb-3" key={proj.id}>
+                  {renderCard(proj)}
                 </div>
               ))}
             </Slider>

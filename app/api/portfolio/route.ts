@@ -6,8 +6,41 @@ const DATA_FILE_PATH = path.join(process.cwd(), "app", "data", "portfolio-data.j
 const CONFIG_FILE_PATH = path.join(process.cwd(), "app", "data", "admin-config.json");
 const LOG_FILE_PATH = path.join(process.cwd(), "app", "data", "activity-log.json");
 
-// Helper to read config
-function getAdminPassword(): string {
+const KV_ENABLED = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+
+async function kvExecute(command: string[]): Promise<any> {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  const response = await fetch(url!, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(command),
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`KV command failed: ${text}`);
+  }
+  const resData = await response.json();
+  return resData.result;
+}
+
+// Helper to read admin password
+async function getAdminPassword(): Promise<string> {
+  if (KV_ENABLED) {
+    try {
+      const configStr = await kvExecute(["GET", "admin_config"]);
+      if (configStr) {
+        const config = JSON.parse(configStr);
+        return config.password || "Sandhu@123";
+      }
+    } catch (err) {
+      console.error("KV error reading admin config password:", err);
+    }
+  }
   try {
     if (!fs.existsSync(CONFIG_FILE_PATH)) {
       return "Sandhu@123";
@@ -21,8 +54,46 @@ function getAdminPassword(): string {
   }
 }
 
+// Helper to read config
+async function getAdminConfig(): Promise<any> {
+  if (KV_ENABLED) {
+    try {
+      const configStr = await kvExecute(["GET", "admin_config"]);
+      if (configStr) {
+        const parsed = JSON.parse(configStr);
+        if (!parsed.password) parsed.password = "Sandhu@123";
+        return parsed;
+      }
+    } catch (err) {
+      console.error("KV error reading admin config:", err);
+    }
+  }
+  try {
+    if (!fs.existsSync(CONFIG_FILE_PATH)) {
+      return { password: "Sandhu@123" };
+    }
+    const fileContents = fs.readFileSync(CONFIG_FILE_PATH, "utf8");
+    const parsed = JSON.parse(fileContents);
+    if (!parsed.password) parsed.password = "Sandhu@123";
+    return parsed;
+  } catch (error) {
+    console.error("Error reading admin-config data:", error);
+    return { password: "Sandhu@123" };
+  }
+}
+
 // Helper to read data
-function getPortfolioData() {
+async function getPortfolioData() {
+  if (KV_ENABLED) {
+    try {
+      const dataStr = await kvExecute(["GET", "portfolio_data"]);
+      if (dataStr) {
+        return JSON.parse(dataStr);
+      }
+    } catch (err) {
+      console.error("KV error reading portfolio data:", err);
+    }
+  }
   try {
     const fileContents = fs.readFileSync(DATA_FILE_PATH, "utf8");
     return JSON.parse(fileContents);
@@ -33,13 +104,64 @@ function getPortfolioData() {
 }
 
 // Helper to write data
-function savePortfolioData(data: any) {
+async function savePortfolioData(data: any) {
+  if (KV_ENABLED) {
+    try {
+      await kvExecute(["SET", "portfolio_data", JSON.stringify(data)]);
+      return true;
+    } catch (err) {
+      console.error("KV error saving portfolio data:", err);
+      return false;
+    }
+  }
   try {
     fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(data, null, 2), "utf8");
     return true;
   } catch (error) {
     console.error("Error writing portfolio data:", error);
     return false;
+  }
+}
+
+// Helper to get activity log
+async function getActivityLog(): Promise<any[]> {
+  if (KV_ENABLED) {
+    try {
+      const logsStr = await kvExecute(["GET", "activity_log"]);
+      if (logsStr) return JSON.parse(logsStr);
+    } catch (err) {
+      console.error("KV error reading activity log:", err);
+    }
+  }
+  try {
+    if (!fs.existsSync(LOG_FILE_PATH)) {
+      return [];
+    }
+    return JSON.parse(fs.readFileSync(LOG_FILE_PATH, "utf8"));
+  } catch (error) {
+    console.error("Error reading activity log:", error);
+    return [];
+  }
+}
+
+// Helper to save activity log
+async function saveActivityLog(logs: any[]): Promise<void> {
+  if (KV_ENABLED) {
+    try {
+      await kvExecute(["SET", "activity_log", JSON.stringify(logs)]);
+      return;
+    } catch (err) {
+      console.error("KV error saving activity log:", err);
+    }
+  }
+  try {
+    const dir = path.dirname(LOG_FILE_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(LOG_FILE_PATH, JSON.stringify(logs, null, 2), "utf8");
+  } catch (error) {
+    console.error("Error saving activity log:", error);
   }
 }
 
@@ -130,24 +252,17 @@ function calculateDiff(oldData: any, newData: any): string[] {
 }
 
 // Helper to append log
-function appendActivityLog(changes: string[]) {
+async function appendActivityLog(changes: string[]) {
   if (changes.length === 0) return;
   try {
-    const dir = path.dirname(LOG_FILE_PATH);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    let logs = [];
-    if (fs.existsSync(LOG_FILE_PATH)) {
-      logs = JSON.parse(fs.readFileSync(LOG_FILE_PATH, "utf8"));
-    }
+    let logs = await getActivityLog();
     logs.unshift({
       id: String(Date.now()),
       timestamp: new Date().toISOString(),
       changes
     });
     logs = logs.slice(0, 50); // Keep last 50 entries
-    fs.writeFileSync(LOG_FILE_PATH, JSON.stringify(logs, null, 2), "utf8");
+    await saveActivityLog(logs);
   } catch (err) {
     console.error("Failed to write activity log:", err);
   }
@@ -159,14 +274,11 @@ export async function GET(request: Request) {
     const activity = searchParams.get("activity");
 
     if (activity) {
-      if (!fs.existsSync(LOG_FILE_PATH)) {
-        return NextResponse.json([]);
-      }
-      const logs = JSON.parse(fs.readFileSync(LOG_FILE_PATH, "utf8"));
+      const logs = await getActivityLog();
       return NextResponse.json(logs);
     }
 
-    const data = getPortfolioData();
+    const data = await getPortfolioData();
     if (!data) {
       return NextResponse.json({ error: "Data not found" }, { status: 404 });
     }
@@ -179,7 +291,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const passwordHeader = request.headers.get("x-admin-password");
-    const adminPassword = getAdminPassword();
+    const adminPassword = await getAdminPassword();
 
     if (passwordHeader !== adminPassword) {
       return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
@@ -190,15 +302,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid data format" }, { status: 400 });
     }
 
-    const oldData = getPortfolioData();
+    const oldData = await getPortfolioData();
     const changes = calculateDiff(oldData, updatedData);
 
-    const success = savePortfolioData(updatedData);
+    const success = await savePortfolioData(updatedData);
     if (!success) {
       return NextResponse.json({ error: "Failed to save data on disk" }, { status: 500 });
     }
 
-    appendActivityLog(changes);
+    await appendActivityLog(changes);
 
     return NextResponse.json({ message: "Portfolio updated successfully", data: updatedData });
   } catch (error: any) {
