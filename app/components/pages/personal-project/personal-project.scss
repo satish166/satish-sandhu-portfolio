@@ -43,25 +43,6 @@
             }
         }
 
-        @media (max-width: 991px) {
-            .slick-track {
-                flex-direction: column !important;
-                gap: 24px !important;
-                transform: none !important;
-                width: 100% !important;
-            }
-
-            .slick-slide {
-                width: 100% !important;
-                height: auto !important;
-                padding-inline: 8px !important;
-            }
-
-            .slick-dots {
-                display: none !important;
-            }
-        }
-        
         .slick-dots {
             bottom: -35px;
 

@@ -1,14 +1,47 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-
 import nodemailer from "nodemailer";
 
 const MESSAGES_FILE_PATH = path.join(process.cwd(), "app", "data", "messages.json");
 const CONFIG_FILE_PATH = path.join(process.cwd(), "app", "data", "admin-config.json");
 
+const KV_ENABLED = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+
+async function kvExecute(command: string[]): Promise<any> {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  const response = await fetch(url!, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(command),
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`KV command failed: ${text}`);
+  }
+  const resData = await response.json();
+  return resData.result;
+}
+
 // Helper to read config
-function getAdminConfig(): any {
+async function getAdminConfig(): Promise<any> {
+  if (KV_ENABLED) {
+    try {
+      const configStr = await kvExecute(["GET", "admin_config"]);
+      if (configStr) {
+        const parsed = JSON.parse(configStr);
+        if (!parsed.password) parsed.password = "Sandhu@123";
+        return parsed;
+      }
+    } catch (err) {
+      console.error("KV error reading admin config in contact:", err);
+    }
+  }
   try {
     if (!fs.existsSync(CONFIG_FILE_PATH)) {
       return { password: "Sandhu@123" };
@@ -24,7 +57,17 @@ function getAdminConfig(): any {
 }
 
 // Helper to get messages
-function getMessages() {
+async function getMessages(): Promise<any[]> {
+  if (KV_ENABLED) {
+    try {
+      const messagesStr = await kvExecute(["GET", "portfolio_messages"]);
+      if (messagesStr) {
+        return JSON.parse(messagesStr);
+      }
+    } catch (err) {
+      console.error("KV error reading portfolio messages:", err);
+    }
+  }
   try {
     if (!fs.existsSync(MESSAGES_FILE_PATH)) {
       return [];
@@ -38,7 +81,16 @@ function getMessages() {
 }
 
 // Helper to save messages
-function saveMessages(messages: any[]) {
+async function saveMessages(messages: any[]): Promise<boolean> {
+  if (KV_ENABLED) {
+    try {
+      await kvExecute(["SET", "portfolio_messages", JSON.stringify(messages)]);
+      return true;
+    } catch (err) {
+      console.error("KV error saving portfolio messages:", err);
+      return false;
+    }
+  }
   try {
     const dir = path.dirname(MESSAGES_FILE_PATH);
     if (!fs.existsSync(dir)) {
@@ -56,13 +108,13 @@ export async function GET(request: Request) {
   try {
     // Check Authorization Password for Admin reading messages
     const passwordHeader = request.headers.get("x-admin-password");
-    const config = getAdminConfig();
+    const config = await getAdminConfig();
 
     if (passwordHeader !== config.password) {
       return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
     }
 
-    const messages = getMessages();
+    const messages = await getMessages();
     return NextResponse.json(messages);
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
@@ -78,7 +130,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Please fill all required fields" }, { status: 400 });
     }
 
-    const messages = getMessages();
+    const messages = await getMessages();
     const newMessage = {
       id: String(Date.now()),
       name,
@@ -88,14 +140,14 @@ export async function POST(request: Request) {
     };
 
     messages.unshift(newMessage); // Add new message to the beginning
-    const success = saveMessages(messages);
+    const success = await saveMessages(messages);
 
     if (!success) {
       return NextResponse.json({ error: "Failed to save message" }, { status: 500 });
     }
 
     // Direct SMTP Email sending via nodemailer
-    const config = getAdminConfig();
+    const config = await getAdminConfig();
     let emailSent = false;
     let emailErrorMsg = "";
 
@@ -141,7 +193,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const passwordHeader = request.headers.get("x-admin-password");
-    const config = getAdminConfig();
+    const config = await getAdminConfig();
 
     if (passwordHeader !== config.password) {
       return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
@@ -154,9 +206,9 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Message ID is required" }, { status: 400 });
     }
 
-    const messages = getMessages();
+    const messages = await getMessages();
     const filtered = messages.filter((m: any) => m.id !== id);
-    const success = saveMessages(filtered);
+    const success = await saveMessages(filtered);
 
     if (!success) {
       return NextResponse.json({ error: "Failed to delete message" }, { status: 500 });
