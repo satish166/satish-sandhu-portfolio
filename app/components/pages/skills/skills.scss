@@ -1,8 +1,16 @@
 @use '../../../styles/components/variables' as *;
+@use '../../../styles/components/mixin' as *;
 
 .skill-section {
     padding-block: 80px;
     background-color: transparent;
+
+    @include media-breakpoint-down-md {
+        padding-block: 50px;
+    }
+    @include media-breakpoint-down-sm {
+        padding-block: 40px;
+    }
 
     .col-xl-4 {
         display: flex;
@@ -21,6 +29,12 @@
             margin-bottom: 24px;
             border-bottom: 1px solid $border-glass;
             padding-bottom: 12px;
+
+            @include media-breakpoint-down-sm {
+                font-size: 17px;
+                margin-bottom: 16px;
+                padding-bottom: 10px;
+            }
         }
 
         .skill-list {
@@ -30,6 +44,15 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             gap: 12px;
+
+            @include media-breakpoint-down-sm {
+                grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+                gap: 8px;
+            }
+            @include media-breakpoint-down-xs {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 6px;
+            }
 
             li {
                 display: flex;
@@ -44,6 +67,11 @@
                 text-align: center;
                 cursor: default;
 
+                @include media-breakpoint-down-sm {
+                    padding: 10px 6px;
+                    border-radius: 10px;
+                }
+
                 .icon-container {
                     display: flex;
                     align-items: center;
@@ -52,6 +80,12 @@
                     height: 38px;
                     margin-bottom: 8px;
                     transition: transform 0.3s ease;
+
+                    @include media-breakpoint-down-sm {
+                        width: 30px;
+                        height: 30px;
+                        margin-bottom: 6px;
+                    }
 
                     svg,
                     img {
@@ -85,6 +119,10 @@
                     margin: 0;
                     color: $text-muted;
                     transition: color 0.3s ease;
+
+                    @include media-breakpoint-down-sm {
+                        font-size: 11px;
+                    }
                 }
 
                 &:hover {
@@ -114,4 +152,4 @@
             }
         }
     }
-}
+}

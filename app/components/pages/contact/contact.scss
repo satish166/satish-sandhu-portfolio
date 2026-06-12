@@ -4,12 +4,24 @@
 .contact-section {
     padding-block: 80px;
 
+    @include media-breakpoint-down-md {
+        padding-block: 50px;
+    }
+    @include media-breakpoint-down-sm {
+        padding-block: 40px;
+    }
+
     .contact-header {
         .section-subheading {
             font-size: 16px;
             color: $text-muted;
             margin-top: 12px;
             font-weight: 400;
+
+            @include media-breakpoint-down-sm {
+                font-size: 14px;
+                margin-top: 8px;
+            }
         }
     }
 
@@ -18,6 +30,10 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
+
+            @include media-breakpoint-down-sm {
+                gap: 16px;
+            }
         }
 
         .contact-info-list {
@@ -28,6 +44,10 @@
             flex-direction: column;
             gap: 16px;
 
+            @include media-breakpoint-down-sm {
+                gap: 10px;
+            }
+
             .list-item {
                 display: flex;
                 align-items: flex-start;
@@ -37,6 +57,15 @@
                 background: rgba(255, 255, 255, 0.015);
                 border: 1px solid rgba(255, 255, 255, 0.04);
                 transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+                @include media-breakpoint-down-sm {
+                    gap: 14px;
+                    padding: 16px 18px;
+                    border-radius: 12px;
+                }
+                @include media-breakpoint-down-xs {
+                    padding: 14px 14px;
+                }
 
                 body.light-theme & {
                     background: rgba(255, 255, 255, 0.8) !important;
@@ -55,7 +84,15 @@
                     border: 1px solid rgba(255, 126, 64, 0.15);
                     color: $cyan-accent;
                     font-size: 18px;
+                    flex-shrink: 0;
                     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+                    @include media-breakpoint-down-sm {
+                        width: 38px;
+                        height: 38px;
+                        font-size: 16px;
+                        border-radius: 10px;
+                    }
 
                     body.light-theme & {
                         background: rgba(255, 126, 64, 0.06) !important;
@@ -67,6 +104,7 @@
                 .info-text {
                     display: flex;
                     flex-direction: column;
+                    min-width: 0;
 
                     h6 {
                         font-size: 11px;
@@ -75,6 +113,11 @@
                         margin-bottom: 4px;
                         text-transform: uppercase;
                         letter-spacing: 0.05em;
+
+                        @include media-breakpoint-down-sm {
+                            font-size: 10px;
+                            margin-bottom: 2px;
+                        }
                     }
 
                     p {
@@ -82,6 +125,12 @@
                         font-weight: 600;
                         color: $white;
                         margin: 0;
+                        word-break: break-word;
+                        overflow-wrap: anywhere;
+
+                        @include media-breakpoint-down-sm {
+                            font-size: 13px;
+                        }
 
                         body.light-theme & {
                             color: #2c2623 !important;
@@ -111,6 +160,10 @@
                     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
                     transform: translateX(6px);
 
+                    @include media-breakpoint-down-sm {
+                        transform: translateX(3px);
+                    }
+
                     body.light-theme & {
                         border-color: rgba(255, 126, 64, 0.22) !important;
                         box-shadow: 0 10px 24px rgba(255, 126, 64, 0.08) !important;
@@ -138,6 +191,10 @@
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
                 color: $text-muted;
+
+                @include media-breakpoint-down-sm {
+                    font-size: 10px;
+                }
             }
 
             .social-links {
@@ -146,6 +203,7 @@
                 margin: 0;
                 display: flex;
                 gap: 12px;
+                flex-wrap: wrap;
 
                 li {
                     a {
@@ -161,6 +219,12 @@
                         transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
                         font-size: 18px;
                         text-decoration: none;
+
+                        @include media-breakpoint-down-sm {
+                            width: 40px;
+                            height: 40px;
+                            font-size: 16px;
+                        }
 
                         body.light-theme & {
                             background: rgba(255, 255, 255, 0.8) !important;
@@ -203,11 +267,27 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 
+            @include media-breakpoint-down-md {
+                padding: 28px;
+                border-radius: 18px;
+            }
+            @include media-breakpoint-down-sm {
+                padding: 20px;
+                border-radius: 14px;
+            }
+            @include media-breakpoint-down-xs {
+                padding: 16px;
+            }
+
             .form-card-title {
                 font-size: 22px;
                 font-weight: 700;
                 color: $white;
                 letter-spacing: -0.01em;
+
+                @include media-breakpoint-down-sm {
+                    font-size: 18px;
+                }
 
                 body.light-theme & {
                     color: #2c2623 !important;
@@ -221,6 +301,12 @@
                 margin-bottom: 24px;
                 font-weight: 600;
                 animation: slideDown 0.3s ease;
+
+                @include media-breakpoint-down-sm {
+                    padding: 10px 14px;
+                    font-size: 13px;
+                    margin-bottom: 16px;
+                }
                 
                 &.success {
                     background: rgba(16, 185, 129, 0.06);
@@ -239,6 +325,10 @@
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+
+                @include media-breakpoint-down-sm {
+                    gap: 14px;
+                }
             }
 
             .field {
@@ -246,12 +336,20 @@
                 flex-direction: column;
                 gap: 8px;
 
+                @include media-breakpoint-down-sm {
+                    gap: 6px;
+                }
+
                 label {
                     font-size: 11px;
                     font-weight: 700;
                     color: $cyan-accent;
                     text-transform: uppercase;
                     letter-spacing: 0.08em;
+
+                    @include media-breakpoint-down-sm {
+                        font-size: 10px;
+                    }
 
                     body.light-theme & {
                         color: #e65f2b !important;
@@ -269,6 +367,12 @@
                     font-size: 15px;
                     transition: all 0.3s ease;
 
+                    @include media-breakpoint-down-sm {
+                        padding: 12px 14px;
+                        font-size: 14px;
+                        border-radius: 10px;
+                    }
+
                     &::placeholder {
                         color: rgba(255, 255, 255, 0.2);
                     }
@@ -284,6 +388,10 @@
                 textarea {
                     resize: vertical;
                     min-height: 120px;
+
+                    @include media-breakpoint-down-sm {
+                        min-height: 100px;
+                    }
                 }
             }
 
@@ -303,6 +411,12 @@
                 box-shadow: 0 5px 15px rgba(255, 126, 64, 0.25);
                 transition: all 0.3s ease;
                 cursor: pointer;
+
+                @include media-breakpoint-down-sm {
+                    padding: 12px 24px;
+                    font-size: 14px;
+                    gap: 8px;
+                }
 
                 .btn-icon {
                     font-size: 14px;
