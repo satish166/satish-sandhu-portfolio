@@ -1,53 +1,57 @@
-// colors
+// Modern Luxury Orange & Gold Dark Theme & Glassmorphism Colors
+$bg-dark: #07070a;
+$bg-card: rgba(18, 18, 24, 0.65);
+$border-glass: rgba(255, 255, 255, 0.06);
+$border-glass-hover: rgba(255, 199, 59, 0.3);
+$text-light: #f9fafb;
+$text-muted: #9ca3af;
+$violet-accent: #ffc73b; // Using gold as secondary
+$cyan-accent: #ff7e40; // Using sunset orange as primary
 
-$primary: #e35205;
-$gray420: #f5f5f5;
-$gray: #a8a9b4;
+// Adapt variables used globally
+$primary: #ff7e40; // Orange primary accent
+$gray420: #0e0e12; // Charcoal base
+$gray: #9ca3af;
 
-
-$blue: #5E88B3;
-$darkblue: #12689d ;
-$light-blue: #f0f8ff;
-$mid-blue: #AAC9FF;
-$secondary: #8693AB;
-$darksecondary: #6b7588;
-$ghostWhite: #F2F1F9;
-$gray90: #e5e5e5;
-$light-gray: #d3d3d3;
-$dim-gray: #f2f2f2;
+$blue: #ff7e40;
+$darkblue: #e06527;
+$light-blue: #181410;
+$mid-blue: #231c16;
+$secondary: #ffc73b; // Gold secondary accent
+$darksecondary: #cca02f;
+$ghostWhite: #0c0d10;
+$gray90: #1a1b22;
+$light-gray: #4b5563;
+$dim-gray: #111115;
 $black: #000000;
 $white: #ffffff;
-$black: #000000;
-$alto: #dddddd;
-$gray1: #ACACAC;
-$gray2: #E1E1E1;
-$gray3: #FAFAFA;
-$gray4: #F3F3F6 ;
-$gray5: #F6F6F6;
-$grayDark: #9D9D9D;
-$redMain: #ff0000;
-$red: #D0011B;
-$alert-danger: #F8D7DA;
-$danger-alert-text: #721C47;
-$darkRed:#b50017;
-$brown: #721C24;
-$lightGreen: #0DC110;
-$dimGreen: #DFF0D8;
-$midGreen: #A4E18B;
-$darkGreen: #3C763D;
-$yellow: #FFBF00;
-$lightRed: #FFD3CE;
-$minRed: #FCA196;
-$mainRed: #E85342;
-$lightYellow: #FFF9DB;
-$midYellow: #FFEE9B;
-$mainYellow: #F7D636;
-$smallYellow: #FFF8E5;
-$dark-yellow: #664d03;
-$sunyellow:#cf8f07;
-$grassgreen:#03912b;
-$silver:#dcdcdc;
-$silver1:#B0B0B0;
-$darkBlue: #004085;
-$blueSlide: #cce5ff;
-$slimBlue: #b8daff;
+$alto: #1a1b22;
+$gray1: #9ca3af;
+$gray2: #374151;
+$gray3: #111115;
+$gray4: #0c0d10;
+$gray5: #1a1b22;
+$grayDark: #6b7280;
+$redMain: #ef4444;
+$red: #f87171;
+$alert-danger: #7f1d1d;
+$danger-alert-text: #fecaca;
+$darkRed:#991b1b;
+$brown: #7c2d12;
+$lightGreen: #10b981;
+$dimGreen: #064e3b;
+$midGreen: #059669;
+$darkGreen: #047857;
+$yellow: #ffc73b;
+$lightYellow: #78350f;
+$midYellow: #b45309;
+$mainYellow: #ffc73b;
+$smallYellow: #451a03;
+$dark-yellow: #78350f;
+$sunyellow:#d97706;
+$grassgreen:#10b981;
+$silver:#374151;
+$silver1:#4b5563;
+$darkBlue: #1e3a8a;
+$blueSlide: #172554;
+$slimBlue: #1e3a8a;

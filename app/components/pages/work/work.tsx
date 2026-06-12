@@ -1,87 +1,155 @@
+'use client';
 
+import React, { useRef } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./work.scss";
-import Image from "next/image";
-import starfurniture from "../../../assets/images/star-furniture.png";
-import kimball from "../../../assets/images/kimball.png";
-import poppin from "../../../assets/images/poppin.png";
 
+interface ProjectItem {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  link: string;
+}
 
+interface WorkProps {
+  projects: ProjectItem[];
+}
 
-export default function Work() {
+const getProjectTechTags = (name: string): string[] => {
+  const n = name.toLowerCase();
+  if (n.includes("poppins") || n.includes("poppin")) {
+    return ["Salesforce CC", "SCSS", "JavaScript", "UX Design"];
+  }
+  if (n.includes("kimball")) {
+    return ["Salesforce CC", "APIs Integration", "Bootstrap", "Vanilla JS"];
+  }
+  if (n.includes("star furniture application") || (n.includes("star") && n.includes("angular"))) {
+    return ["Angular 14", "TypeScript", "RxJS", "SCSS Layouts"];
+  }
+  if (n.includes("star furniture") || n.includes("star")) {
+    return ["Magento 2", "PHP", "Less CSS", "E-commerce"];
+  }
+  return ["Web Development", "HTML5", "CSS3"];
+};
+
+export default function Work({ projects }: WorkProps) {
+  const list = projects || [];
+  const sliderRef = useRef<Slider>(null);
+
+  if (list.length === 0) return null;
+
+  const settings = {
+    dots: true,
+    infinite: list.length > 2,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    arrows: false,
+    draggable: true,
+    swipe: true,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  };
+
   return (
     <>
-      <section className="work-section" id="liveprojects" data-aos="fade-down">
+      <section className="work-section overflow-hidden" id="liveprojects" data-aos="fade-up">
         <div className="work-content container">
-          <h2 className="heading">Live Projects</h2>
-          <h6 className="">A showcase of projects that blend creativity with functionality.</h6>
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="work-box">
-                <a className="visit-site" href="https://www.poppin.com/" target="_blank">
-                  <Image src={poppin} alt="Poppins" className="h-auto" />
-                  <div className="visit-text">
-                    <p>Visit site</p>
-                  </div>
-                </a>
-                <div className="about-project">
-                  <h4>Poppins (Salesforce)</h4>
-                  <p>Poppin is a modern design-driven company based in New York City that aims to reimagine everyday workspaces by creating well-designed office products and furniture that help people “work happy.” The company started by asking a simple question: what if common office tools like staplers were reimagined in a way that was both functional and visually inspiring? From that idea, Poppin was born with a mission to make work more enjoyable through innovative, colorful, and thoughtfully designed products.</p>
-                  <a href="https://www.poppin.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
-                </div>
+          <div className="d-flex align-items-center justify-content-between flex-wrap mb-4">
+            <div>
+              <h2 className="heading">Live Projects</h2>
+              <h6 className="section-subheading mb-0">A showcase of production-ready web platforms that blend creativity with functionality.</h6>
+            </div>
+            
+            {/* Carousel Controls */}
+            {list.length > 2 && (
+              <div className="carousel-controls-wrapper d-flex gap-2 mt-3 mt-md-0">
+                <button 
+                  className="ctrl-btn prev" 
+                  type="button" 
+                  onClick={() => sliderRef.current?.slickPrev()} 
+                  aria-label="Previous slide"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: '16px', height: '16px' }}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button 
+                  className="ctrl-btn next" 
+                  type="button" 
+                  onClick={() => sliderRef.current?.slickNext()} 
+                  aria-label="Next slide"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: '16px', height: '16px' }}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            )}
+          </div>
 
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="work-box">
-               
-                <a className="visit-site" href="https://www.kimballinternational.com/home" target="_blank">
-                  <Image src={kimball} alt="Kimball International" className="h-auto" />
-                  <div className="visit-text">
-                    <p>Visit site</p>
-                  </div>
-                </a>
-                 <div className="about-project">
-                  <h4>Kimball International (Salesforce)</h4>
-                   <p>Kimball International is a long-established American commercial furnishings company known for creating high-quality, design-driven solutions for workspaces, healthcare environments, educational settings, and hospitality spaces. With roots dating back to 1950, the company combines a heritage of craftsmanship with modern design thinking to help shape functional, inspiring places where people work, learn, heal, and gather.</p>
-                   <a href="https://www.kimballinternational.com/home" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="work-box">
-                <a className="visit-site" href="https://starfurniture.com/" target="_blank">
-                  <Image src={starfurniture} alt="Star Furniture" className="h-auto" />
-                  <div className="visit-text">
-                    <p>Visit site</p>
-                  </div>
-                </a>
-                 <div className="about-project">
-                  <h4>Star Furniture (Magento)</h4>
-                   <p>Star Furniture is a century-old American home furnishings retailer based in Texas, offering a wide range of quality furniture and décor with a focus on style, comfort, and customer satisfaction.</p>
-                   <a href="https://starfurniture.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="work-box">
-                
-                <a className="visit-site" href="https://starfurniture.com/" target="_blank">
-                  <Image src={starfurniture} alt="Star Furniture" className="h-auto" />
-                  <div className="visit-text">
-                    <p>Visit site</p>
-                  </div>
-                </a>
-                <div className="about-project">
-                  <h4>Star Furniture Application (Angular)</h4>
-                   <p>Star Furniture is a century-old American home furnishings retailer based in Texas, offering a wide range of quality furniture and décor with a focus on style, comfort, and customer satisfaction.</p>
-                 <a href="https://starfurniture.com/" target="_blank" className="button button-outline-primary my-2">Live Preview</a>
-                </div>
-              </div>
-            </div>
+          <div className="live-slider-container mt-4">
+            <Slider ref={sliderRef} {...settings}>
+              {list.map((proj) => (
+                <div className="px-2 pb-3" key={proj.id}>
+                  <div className="project-card-wrapper">
+                    <div className="browser-mockup glass-card">
+                      {/* Browser Header / Title Bar */}
+                      <div className="browser-header">
+                        <div className="browser-dots">
+                          <span className="dot red"></span>
+                          <span className="dot yellow"></span>
+                          <span className="dot green"></span>
+                        </div>
+                        <div className="browser-address-bar">
+                          {proj.link.replace("https://", "").replace("www.", "").replace(/\/$/, "")}
+                        </div>
+                      </div>
+                      
+                      {/* Browser Window Body */}
+                      <div className="browser-body">
+                        <div className="image-overlay-container">
+                          <img src={proj.image || "/uploads/poppin.png"} alt={proj.name} className="browser-image" />
+                          <div className="browser-hover-overlay">
+                            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="explore-btn">
+                              Visit Live Site
+                            </a>
+                          </div>
+                        </div>
+                      </div>
 
+                      {/* Project Info Section */}
+                      <div className="project-details">
+                        <div className="tags-container">
+                          {getProjectTechTags(proj.name).map((tag, i) => (
+                            <span className="tech-badge" key={i}>{tag}</span>
+                          ))}
+                        </div>
+                        <h3 className="project-title">{proj.name}</h3>
+                        <p className="project-description">{proj.description}</p>
+                        <div className="action-row">
+                          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="live-link">
+                            <span>Launch Live Site</span>
+                            <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
-
       </section>
     </>
   );

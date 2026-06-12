@@ -1,0 +1,183 @@
+{
+  "profile": {
+    "name": "Satish Kumar",
+    "title": "Frontend Developer",
+    "subtitles": [
+      "I'm Frontend Developer",
+      "I'm UI/UX Designer",
+      "I'm Web Developer"
+    ],
+    "about": "I am a Frontend Developer with 5 years of experience in building scalable, high-performance, and user-centric web applications. I specialize in React, Angular, Next.js, and Salesforce Commerce Cloud (SFCC), with strong expertise in modern styling solutions like SCSS and Tailwind CSS. I focus on writing clean, maintainable code and creating seamless user experiences across devices.",
+    "subtitle": "UI/UX Designer & Web Developer",
+    "birthday": "10 Jan 2000",
+    "phone": "+91 8278860269",
+    "age": "25 Years",
+    "email": "sandhusatish166@gmail.com",
+    "degree": "Bachelor of Computer Applications (BCA)",
+    "address": "Una (H.P)",
+    "resumeUrl": "/satish-resume.pdf",
+    "avatar": "/uploads/1781243499421-242023870.jpg"
+  },
+  "socials": {
+    "linkedin": "https://www.linkedin.com/in/satish-kumar-89250a214",
+    "whatsapp": "https://wa.me/8278860269"
+  },
+  "skills": [
+    {
+      "category": "Frontend Development",
+      "items": [
+        {
+          "name": "HTML",
+          "icon": "faHtml5",
+          "color": "#e34f26"
+        },
+        {
+          "name": "CSS",
+          "icon": "faCss3Alt",
+          "color": "#1572b6"
+        },
+        {
+          "name": "Scss",
+          "icon": "faSass",
+          "color": "#cc6699"
+        },
+        {
+          "name": "Less",
+          "icon": "faLess",
+          "color": "#1d365d"
+        },
+        {
+          "name": "Tailwind",
+          "icon": "tailwind",
+          "color": "#06b6d4"
+        },
+        {
+          "name": "Javascript",
+          "icon": "faJs",
+          "color": "#f7df1e"
+        },
+        {
+          "name": "Next JS",
+          "icon": "nextjs",
+          "color": "#000000"
+        },
+        {
+          "name": "Angular",
+          "icon": "faAngular",
+          "color": "#dd0031"
+        },
+        {
+          "name": "React",
+          "icon": "faReact",
+          "color": "#61dafb"
+        }
+      ]
+    },
+    {
+      "category": "CMS Tools",
+      "items": [
+        {
+          "name": "Wordpress",
+          "icon": "faWordpress",
+          "color": "#21759b"
+        },
+        {
+          "name": "Salesforce",
+          "icon": "faSalesforce",
+          "color": "#00a1e0"
+        },
+        {
+          "name": "Canva",
+          "icon": "canva",
+          "color": "#00c4cc"
+        }
+      ]
+    },
+    {
+      "category": "Other Tools",
+      "items": [
+        {
+          "name": "Github",
+          "icon": "faGithub",
+          "color": "#ffffff"
+        },
+        {
+          "name": "Figma",
+          "icon": "faFigma",
+          "color": "#f24e1e"
+        },
+        {
+          "name": "Photoshop",
+          "icon": "photoshop",
+          "color": "#31a8ff"
+        },
+        {
+          "name": "Illustrator",
+          "icon": "illustrator",
+          "color": "#ff9a00"
+        },
+        {
+          "name": "XD",
+          "icon": "xd",
+          "color": "#ff61f6"
+        }
+      ]
+    }
+  ],
+  "liveProjects": [
+    {
+      "id": "1",
+      "name": "Poppins (Salesforce)",
+      "description": "Poppin is a modern design-driven company based in New York City that aims to reimagine everyday workspaces by creating well-designed office products and furniture that help people “work happy.” The company started by asking a simple question: what if common office tools like staplers were reimagined in a way that was both functional and visually inspiring? From that idea, Poppin was born with a mission to make work more enjoyable through innovative, colorful, and thoughtfully designed products.",
+      "image": "/uploads/poppin.png",
+      "link": "https://www.poppin.com/"
+    },
+    {
+      "id": "2",
+      "name": "Kimball International (Salesforce)",
+      "description": "Kimball International is a long-established American commercial furnishings company known for creating high-quality, design-driven solutions for workspaces, healthcare environments, educational settings, and hospitality spaces. With roots dating back to 1950, the company combines a heritage of craftsmanship with modern design thinking to help shape functional, inspiring places where people work, learn, heal, and gather.",
+      "image": "/uploads/kimball.png",
+      "link": "https://www.kimballinternational.com/home"
+    },
+    {
+      "id": "3",
+      "name": "Star Furniture (Magento)",
+      "description": "Star Furniture is a century-old American home furnishings retailer based in Texas, offering a wide range of quality furniture and décor with a focus on style, comfort, and customer satisfaction.",
+      "image": "/uploads/star-furniture.png",
+      "link": "https://starfurniture.com/"
+    },
+    {
+      "id": "4",
+      "name": "Star Furniture Application (Angular)",
+      "description": "Star Furniture is a century-old American home furnishings retailer based in Texas, offering a wide range of quality furniture and décor with a focus on style, comfort, and customer satisfaction.",
+      "image": "/uploads/star-furniture.png",
+      "link": "https://starfurniture.com/"
+    }
+  ],
+  "personalProjects": [
+    {
+      "id": "1",
+      "name": "Gym Fitness",
+      "description": "Gym fitness is a modern lifestyle movement focused on empowering individuals to build stronger, healthier, and more confident versions of themselves. Whether it’s lifting weights, running on a treadmill, or practicing functional workouts, gym fitness aims to transform routines into energizing experiences that help people push limits, improve well‑being, and feel their best both inside and outside the gym.",
+      "image": "/uploads/gym-project-banner.png",
+      "link": "https://gym-project-six-theta.vercel.app/",
+      "btnText": "Visit Gym Fitness"
+    },
+    {
+      "id": "2",
+      "name": "E-Learning Platform",
+      "description": "An e-learning platform designed to provide accessible and engaging educational content for learners of all levels. The platform features interactive courses, progress tracking, and a user-friendly interface that makes learning enjoyable and effective. The platform features interactive courses, progress tracking, and a user-friendly interface that makes learning enjoyable and effective.",
+      "image": "/uploads/e-learning-image.png",
+      "link": "https://e-learning-sk.vercel.app/",
+      "btnText": "Visit E-Learning Platform"
+    },
+    {
+      "id": "3",
+      "name": "Wedding Invitation",
+      "description": "A joyful occasion designed to honor love, unity, and the beginning of a beautiful journey together. The celebration includes heartfelt rituals, shared laughter, and an inviting ambience that makes every moment memorable, uplifting, and filled with blessings for all who join us on this special day.",
+      "image": "/uploads/wedding-pic.png",
+      "link": "https://wedding-invitation-flax-omega.vercel.app/",
+      "btnText": "Visit Wedding Invitation"
+    }
+  ]
+}

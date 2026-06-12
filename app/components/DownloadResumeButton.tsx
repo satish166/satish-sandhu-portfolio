@@ -1,18 +1,7 @@
-'use client';
-
 export default function DownloadResumeButton() {
-  const handleDownload = () => {
-    const a = document.createElement('a');
-    a.href = '/satish-resume.pdf';                  // put PDF in /public
-    a.download = 'Satish-Kumar-Resume.pdf';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  };
-
   return (
-    <button onClick={handleDownload} className="button button-primary">
+    <a href="/satish-resume.pdf" download="Satish-Kumar-Resume.pdf" className="button button-primary d-inline-flex align-items-center justify-content-center" style={{ textDecoration: 'none' }}>
       Download Resume (PDF)
-    </button>
+    </a>
   );
 }

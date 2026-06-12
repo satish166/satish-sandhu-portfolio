@@ -1,0 +1,45 @@
+@use '../../styles/components/variables' as *;
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: $cyan-accent; // Sunset Orange
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(255, 126, 64, 0.4);
+  transition: width 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              height 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              background-color 0.2s, 
+              border 0.2s, 
+              box-shadow 0.2s;
+  
+  &.hovered {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 126, 64, 0.05);
+    border: 1px solid $cyan-accent;
+    box-shadow: 0 0 15px rgba(255, 126, 64, 0.2);
+  }
+
+  &.clicked {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 199, 59, 0.08); // Gold accent
+    border: 1px solid $violet-accent;
+    box-shadow: 0 0 15px rgba(255, 199, 59, 0.3);
+  }
+}
+
+// Disable default cursor on hover-enabled desktop devices
+@media (hover: hover) and (pointer: fine) {
+  html, body {
+    cursor: none !important;
+  }
+  
+  a, button, input, textarea, select, [role="button"], .visit-site, .tab-btn, .social-btn, .detail-value a {
+    cursor: none !important;
+  }
+}

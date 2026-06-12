@@ -1,60 +1,122 @@
+'use client';
 
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faCalendarAlt, faPhone, faEnvelope, faGraduationCap, faMapMarkerAlt, faUserClock 
+} from "@fortawesome/free-solid-svg-icons";
 import "./about.scss";
 
-import Image from "next/image";
+interface AboutProps {
+  profile: any;
+}
 
-import MyImage from "../../../assets/images/my-profile-img.jpg";
+export default function About({ profile }: AboutProps) {
+  const p = profile || {};
+  const avatarSrc = p.avatar || "/uploads/my-profile-img.jpg";
 
-export default function About() {
   return (
     <>
-      <section className="container about-section overflow-hidden" id="about" data-aos="fade-up" data-aos-delay="200">
-           <div className="about-content">
-              <h2 className="heading"  data-aos="fade-right">About</h2>
-              <h6 className="" data-aos="fade-right">I am a Frontend Developer with 5 years of experience in building scalable, high-performance, and user-centric web applications. I specialize in React, Angular, Next.js, and Salesforce Commerce Cloud (SFCC), with strong expertise in modern styling solutions like SCSS and Tailwind CSS. I focus on writing clean, maintainable code and creating seamless user experiences across devices.</h6>
-           </div>
-            <div className="personal-info">
-           <div className="row align-items-center">
-            <div className="col-md-4" data-aos="fade-right">
-               <div className="about-image">
-                <Image src={MyImage} alt="s" className="h-auto" />
-               </div>
-            </div>
-            <div className="col-md-8" data-aos="fade-left">
-              <h3>UI/UX Designer & Web Developer.</h3>
-              <div className="prsonal-details">
-                <ul>
-                  <li>
-                    <p className="font-semibold">Birthday:</p>
-                    <p>10 Jan 2000</p>
-                  </li>
-                  <li>
-                    <p className="font-semibold">Phone:</p>
-                    <p><a href="tel:8278860269">+91 8278860269</a></p>
-                  </li>
-                  <li>
-                    <p className="font-semibold">Age:</p>
-                    <p>25 Years</p>
-                  </li>
-                  <li>
-                    <p className="font-semibold">Email:</p>
-                    <p><a href="mailto:sandhusatish166@gmail.com">sandhusatish166@gmail.com</a></p>
-                  </li>
-                  <li>
-                    <p className="font-semibold">Degree:</p>
-                    <p>Bachelor of Computer Applications (BCA)</p>
-                  </li>
-                  <li>
-                    <p className="font-semibold">Address:</p>
-                    <p>Una (H.P)</p>
-                  </li>
-                  
-                </ul>
+      <section className="about-section overflow-hidden" id="about" data-aos="fade-up" data-aos-delay="200">
+        <div className="container">
+          <div className="about-content">
+            <h2 className="heading" data-aos="fade-right">About Me</h2>
+            <h6 className="about-bio" data-aos="fade-right">
+              {p.about || "I am a Frontend Developer with experience in building high-performance, user-centric web applications."}
+            </h6>
+          </div>
+          <div className="personal-info">
+            <div className="row align-items-center">
+              {/* Profile Image Wrapper Column */}
+              <div className="col-lg-4" data-aos="fade-right">
+                <div className="about-image-wrapper">
+                  <div className="image-border-glow"></div>
+                  <div className="about-image">
+                    <img src={avatarSrc} alt={p.name || "Profile Picture"} className="w-full h-auto" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Personal Details Dashboard Tiles Column */}
+              <div className="col-lg-8" data-aos="fade-left">
+                <h3 className="about-subtitle">{p.subtitle || "UI/UX Designer & Web Developer"}</h3>
+                
+                <div className="personal-details-grid mt-4">
+                  {p.birthday && (
+                    <div className="detail-card glass-card">
+                      <div className="detail-icon">
+                        <FontAwesomeIcon icon={faCalendarAlt} />
+                      </div>
+                      <div className="detail-info">
+                        <span className="detail-title">Birthday</span>
+                        <span className="detail-text">{p.birthday}</span>
+                      </div>
+                    </div>
+                  )}
+                  {p.phone && (
+                    <div className="detail-card glass-card">
+                      <div className="detail-icon">
+                        <FontAwesomeIcon icon={faPhone} />
+                      </div>
+                      <div className="detail-info">
+                        <span className="detail-title">Phone</span>
+                        <span className="detail-text">
+                          <a href={`tel:${p.phone}`}>{p.phone}</a>
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {p.age && (
+                    <div className="detail-card glass-card">
+                      <div className="detail-icon">
+                        <FontAwesomeIcon icon={faUserClock} />
+                      </div>
+                      <div className="detail-info">
+                        <span className="detail-title">Age</span>
+                        <span className="detail-text">{p.age}</span>
+                      </div>
+                    </div>
+                  )}
+                  {p.email && (
+                    <div className="detail-card glass-card">
+                      <div className="detail-icon">
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </div>
+                      <div className="detail-info">
+                        <span className="detail-title">Email</span>
+                        <span className="detail-text">
+                          <a href={`mailto:${p.email}`}>{p.email}</a>
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {p.degree && (
+                    <div className="detail-card glass-card">
+                      <div className="detail-icon">
+                        <FontAwesomeIcon icon={faGraduationCap} />
+                      </div>
+                      <div className="detail-info">
+                        <span className="detail-title">Degree</span>
+                        <span className="detail-text">{p.degree}</span>
+                      </div>
+                    </div>
+                  )}
+                  {p.address && (
+                    <div className="detail-card glass-card">
+                      <div className="detail-icon">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      </div>
+                      <div className="detail-info">
+                        <span className="detail-title">Location</span>
+                        <span className="detail-text">{p.address}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-           </div>
-            </div>
-           
+          </div>
+        </div>
       </section>
     </>
   );

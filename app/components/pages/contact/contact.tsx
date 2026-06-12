@@ -1,99 +1,230 @@
+"use client";
+
+import { useState } from "react";
 import "./contact.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt, faPhoneAlt, faEnvelope, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
-import Image from "next/image";
-import Address from "../../../assets/images/address.svg";
-import Phone from "../../../assets/images/phone.svg";
-import Mail from "../../../assets/images/mail.svg";
-import Linkdin from "../../../assets/images/linkdin.svg";
-import Whatsapp from "../../../assets/images/whatsapp.svg";
+interface ContactProps {
+  profile: any;
+  socials: any;
+}
 
-export default function Contact() {
+export default function Contact({ profile, socials }: ContactProps) {
+  const p = profile || {};
+  const s = socials || {};
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({
+    type: null,
+    message: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    setStatus({ type: null, message: "" });
+
+    const submissionName = formData.name;
+    const submissionEmail = formData.email;
+    const submissionMessage = formData.message;
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: submissionName,
+          email: submissionEmail,
+          message: submissionMessage
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus({
+          type: "success",
+          message: data.message || "Message sent successfully!"
+        });
+        
+        // WhatsApp Web/App redirect (using country code 91 for Indian phone 8278860269)
+        const waText = encodeURIComponent(`Hi Satish,\n\nI just sent you a message through your portfolio contact form.\n\nName: ${submissionName}\nEmail: ${submissionEmail}\nMessage: ${submissionMessage}`);
+        window.open(`https://wa.me/918278860269?text=${waText}`, "_blank");
+
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus({
+          type: "error",
+          message: data.error || "Failed to send message."
+        });
+      }
+    } catch (err) {
+      setStatus({
+        type: "error",
+        message: "An unexpected error occurred. Please try again."
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <>
       <section className="contact-section overflow-hidden" id="contactus" data-aos="fade-up" data-aos-delay="300">
-        <div className="work-content container">
-            <div className="row">
-              <div className="left-section col-lg-5">
-                <h2 className="heading">Contact Us
-              </h2>
-              <div className="contact-us" data-aos="fade-right">
-                <ul>
-                  <li className="list-item">
-                     <Image  src={Address} alt="Hero" className="h-auto contact-us-icons" />
-                     <div className="">
-                        <h6>Address</h6>
-                        <p>Una (H.P)</p>
-                     </div>
-                  </li>
-                  <li className="list-item">
-                    <Image  src={Phone} alt="Hero" className="h-auto contact-us-icons" />
-                     <div className="">
-                        <h6>Call Us</h6>
-                        <p><a target="_blank" href="tel:8278860269">8278860269</a></p>
+        <div className="container contact-wrapper">
+          {/* Centered Heading Layout */}
+          <div className="contact-header text-center mb-5">
+            <h2 className="heading">Let's Connect</h2>
+            <h6 className="section-subheading mx-auto" style={{ maxWidth: '600px' }}>
+              Have a project in mind, want to discuss Salesforce integrations, or just want to say hi? Reach out today!
+            </h6>
+          </div>
 
-                     </div>
-                  </li>
-                  <li className="list-item">
-                    <Image  src={Mail} alt="Hero" className="h-auto contact-us-icons" />
-                     <div className="">
-                        <h6>Address</h6>
-                        <p>Una (H.P)</p>
-                     </div>
-                  </li>
+          <div className="row mt-4">
+            {/* Left Contact Info Column */}
+            <div className="left-section col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+              <div className="contact-us-details">
+                <ul className="contact-info-list">
+                  {p.address && (
+                    <li className="list-item glass-card">
+                      <div className="icon-box">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      </div>
+                      <div className="info-text">
+                        <h6>Location</h6>
+                        <p>{p.address}</p>
+                      </div>
+                    </li>
+                  )}
+                  {p.phone && (
+                    <li className="list-item glass-card">
+                      <div className="icon-box">
+                        <FontAwesomeIcon icon={faPhoneAlt} />
+                      </div>
+                      <div className="info-text">
+                        <h6>Call Directly</h6>
+                        <p><a target="_blank" href={`tel:${p.phone}`} rel="noopener noreferrer">{p.phone}</a></p>
+                      </div>
+                    </li>
+                  )}
+                  {p.email && (
+                    <li className="list-item glass-card">
+                      <div className="icon-box">
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </div>
+                      <div className="info-text">
+                        <h6>Email Address</h6>
+                        <p><a target="_blank" href={`mailto:${p.email}`} rel="noopener noreferrer">{p.email}</a></p>
+                      </div>
+                    </li>
+                  )}
                 </ul>
 
-                  <ul className="social-links">
-                    <li>
-                      <a target="_blank" href="https://www.linkedin.com/in/satish-kumar-89250a214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                       <Image  src={Linkdin} alt="Hero" className="h-auto contact-us-icons" />
-                      </a>
-                    </li>
-                    <li> 
-                      <a target="_blank" href="https://wa.me/8278860269">
-                        <Image  src={Whatsapp} alt="Hero" className="h-auto contact-us-icons" />
-                      </a>
-                    </li>
+                <div className="social-links-container mt-4 pt-2">
+                  <h6 className="socials-label">Follow Me</h6>
+                  <ul className="social-links d-flex gap-3 mt-3">
+                    {s.linkedin && (
+                      <li>
+                        <a target="_blank" href={s.linkedin} rel="noopener noreferrer" className="linkedin" title="LinkedIn">
+                          <FontAwesomeIcon icon={faLinkedin} />
+                        </a>
+                      </li>
+                    )}
+                    {s.whatsapp && (
+                      <li>
+                        <a target="_blank" href={s.whatsapp} rel="noopener noreferrer" className="whatsapp" title="WhatsApp">
+                          <FontAwesomeIcon icon={faWhatsapp} />
+                        </a>
+                      </li>
+                    )}
                   </ul>
-              </div>
-              </div>
-              <div className="right-section col-lg-12">
-                <div className="row">
-                  <div className="col-xl-5 d-none d-lg-block">
-    
-                  </div>
-                  <div className="col-xl-7">
-                    <div className="get-in-touch" data-aos="fade-left" data-aos-delay="500">
-                          <h2 className="heading">Let's Work Together</h2>
-                          <p>Have a project in mind or want to collaborate? I'm just a message away</p>
-                          <form action="" method="get">
-                              <div className="field">
-                                <label htmlFor="Name">Name</label>
-                                <input type="text" placeholder="Enter Your Name" />
-                              </div>
-                              <div className="field">
-                                <label htmlFor="Name">Email</label>
-                                <input type="email" placeholder="Enter Your Name" />
-                              </div>
-                              <div className="field">
-                                <label htmlFor="Name">Message</label>
-                                <textarea name="Message" id="message" placeholder="Enter Message">
-                                  
-                                </textarea>
-                              </div>
-                              <div className="field">
-                              <a target="_blank" href="mailto:sandhusatish166@gmail.com" className="button button-primary" >Send Message</a>
-                              </div>
-
-                          </form>
-                    </div>
-
-                  </div>
                 </div>
               </div>
-
             </div>
-        </div>
+            
+            {/* Right Contact Form Column */}
+            <div className="right-section col-lg-7" data-aos="fade-left" data-aos-delay="400">
+              <div className="get-in-touch glass-card">
+                <h4 className="form-card-title mb-4">Send a Message</h4>
+                
+                {status.type && (
+                  <div className={`status-alert ${status.type}`}>
+                    {status.message}
+                  </div>
+                )}
 
+                <form onSubmit={handleSubmit} className="contact-form">
+                  <div className="field">
+                    <label htmlFor="name">Name</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      placeholder="Enter Your Name" 
+                      value={formData.name}
+                      onChange={handleChange}
+                      required 
+                    />
+                  </div>
+                  
+                  <div className="field">
+                    <label htmlFor="email">Email</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      placeholder="Enter Your Email" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      required 
+                    />
+                  </div>
+                  
+                  <div className="field">
+                    <label htmlFor="message">Message</label>
+                    <textarea 
+                      id="message" 
+                      placeholder="Enter Message" 
+                      rows={4} 
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                    ></textarea>
+                  </div>
+                  
+                  <div className="field mt-4">
+                    <button 
+                      type="submit" 
+                      className="send-message-btn button-primary"
+                      disabled={sending}
+                    >
+                      {sending ? "Sending..." : (
+                        <>
+                          <span>Send Message</span>
+                          <FontAwesomeIcon icon={faPaperPlane} className="btn-icon" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );
