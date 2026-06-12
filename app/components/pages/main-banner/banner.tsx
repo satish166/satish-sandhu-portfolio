@@ -34,7 +34,7 @@ export default function MainBanner({ profile, socials }: MainBannerProps) {
         <div className="container banner-content">
           <div className="row align-items-center">
             {/* Left Content Column */}
-            <div className="col-lg-7 text-center text-lg-start" data-aos="fade-right" data-aos-delay="200">
+            <div className="col-lg-7 text-center text-lg-start">
               <div className="welcome-pill">
                 <span className="welcome-pulse"></span>
                 <span className="welcome-text">Senior Frontend Architect</span>
@@ -99,7 +99,7 @@ export default function MainBanner({ profile, socials }: MainBannerProps) {
             </div>
 
             {/* Right Avatar Column */}
-            <div className="col-lg-5 d-flex justify-content-center mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="400">
+            <div className="col-lg-5 d-flex justify-content-center mt-5 mt-lg-0">
               <div className="avatar-isometric-wrapper">
                 <div className="isometric-glow-ring"></div>
                 <div className="avatar-glass-shield"></div>

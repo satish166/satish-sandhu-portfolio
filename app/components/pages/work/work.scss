@@ -7,6 +7,7 @@
     @include media-breakpoint-down-md {
         padding-block: 50px;
     }
+
     @include media-breakpoint-down-sm {
         padding-block: 40px;
     }
@@ -51,7 +52,7 @@
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(255, 126, 64, 0.15);
             }
-            
+
             &:focus {
                 outline: none;
             }
@@ -63,7 +64,7 @@
         display: flex;
         flex-direction: column;
         transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        
+
         &:hover {
             transform: translateY(-8px);
 
@@ -116,9 +117,17 @@
                         height: 8px;
                     }
 
-                    &.red { background-color: #ef4444; }
-                    &.yellow { background-color: #f59e0b; }
-                    &.green { background-color: #10b981; }
+                    &.red {
+                        background-color: #ef4444;
+                    }
+
+                    &.yellow {
+                        background-color: #f59e0b;
+                    }
+
+                    &.green {
+                        background-color: #10b981;
+                    }
                 }
             }
 
@@ -268,7 +277,7 @@
 
             .action-row {
                 margin-top: auto;
-                
+
                 .live-link {
                     display: inline-flex;
                     align-items: center;
@@ -303,8 +312,8 @@
         // Hover events for mockup
         &:hover {
             border-color: rgba(6, 182, 212, 0.25);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
-                        0 0 20px rgba(6, 182, 212, 0.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(6, 182, 212, 0.05);
 
             .browser-body {
                 .image-overlay-container {
@@ -335,52 +344,72 @@
             height: inherit !important;
             display: flex !important;
             justify-content: center;
-            
-            & > div {
+
+            &>div {
                 width: 100%;
                 display: flex;
             }
         }
-        
-        .slick-dots {
-            bottom: -35px;
 
-            @include media-breakpoint-down-sm {
-                bottom: -28px;
+        @media (max-width: 991px) {
+            .slick-track {
+                flex-direction: column !important;
+                gap: 24px !important;
+                transform: none !important;
+                width: 100% !important;
             }
-            
-            li {
-                margin: 0 4px;
 
-                @include media-breakpoint-down-sm {
-                    margin: 0 2px;
-                }
-                
-                button::before {
-                    color: rgba(255, 255, 255, 0.25);
-                    font-size: 8px;
-                    opacity: 1;
-                    transition: color 0.3s;
+            .slick-slide {
+                width: 100% !important;
+                height: auto !important;
+                padding-inline: 8px !important;
+            }
 
-                    @include media-breakpoint-down-sm {
-                        font-size: 6px;
-                    }
-                }
-                
-                &.slick-active button::before {
-                    color: $cyan-accent;
-                }
+            .slick-dots {
+                display: none !important;
             }
         }
+    }
 
-        body.light-theme & {
-            .slick-dots li {
-                button::before {
-                    color: rgba(0, 0, 0, 0.15) !important;
+    .slick-dots {
+        bottom: -35px;
+
+        @include media-breakpoint-down-sm {
+            bottom: -28px;
+        }
+
+        li {
+            margin: 0 4px;
+
+            @include media-breakpoint-down-sm {
+                margin: 0 2px;
+            }
+
+            button::before {
+                color: rgba(255, 255, 255, 0.25);
+                font-size: 8px;
+                opacity: 1;
+                transition: color 0.3s;
+
+                @include media-breakpoint-down-sm {
+                    font-size: 6px;
                 }
-                &.slick-active button::before {
-                    color: #e65f2b !important;
-                }
+            }
+
+            &.slick-active button::before {
+                color: $cyan-accent;
+            }
+        }
+    }
+
+    body.light-theme & {
+        .slick-dots li {
+            button::before {
+                color: rgba(0, 0, 0, 0.15) !important;
+            }
+
+            &.slick-active button::before {
+                color: #e65f2b !important;
             }
         }
     }

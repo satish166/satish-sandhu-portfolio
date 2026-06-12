@@ -63,9 +63,13 @@ export default function Contact({ profile, socials }: ContactProps) {
           message: data.message || "Message sent successfully!"
         });
         
-        // WhatsApp Web/App redirect (using country code 91 for Indian phone 8278860269)
-        const waText = encodeURIComponent(`Hi Satish,\n\nI just sent you a message through your portfolio contact form.\n\nName: ${submissionName}\nEmail: ${submissionEmail}\nMessage: ${submissionMessage}`);
-        window.open(`https://wa.me/918278860269?text=${waText}`, "_blank");
+        // WhatsApp Web/App redirect - wrap in try-catch to prevent popup blocker errors from failing the form submission
+        try {
+          const waText = encodeURIComponent(`Hi Satish,\n\nI just sent you a message through your portfolio contact form.\n\nName: ${submissionName}\nEmail: ${submissionEmail}\nMessage: ${submissionMessage}`);
+          window.open(`https://wa.me/918278860269?text=${waText}`, "_blank");
+        } catch (waErr) {
+          console.warn("WhatsApp redirect popup was blocked or failed:", waErr);
+        }
 
         setFormData({ name: "", email: "", message: "" });
       } else {
@@ -86,7 +90,7 @@ export default function Contact({ profile, socials }: ContactProps) {
 
   return (
     <>
-      <section className="contact-section overflow-hidden" id="contactus" data-aos="fade-up" data-aos-delay="300">
+      <section className="contact-section overflow-hidden" id="contactus">
         <div className="container contact-wrapper">
           {/* Centered Heading Layout */}
           <div className="contact-header text-center mb-5">
@@ -98,7 +102,7 @@ export default function Contact({ profile, socials }: ContactProps) {
 
           <div className="row mt-4">
             {/* Left Contact Info Column */}
-            <div className="left-section col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
+            <div className="left-section col-lg-5 mb-5 mb-lg-0">
               <div className="contact-us-details">
                 <ul className="contact-info-list">
                   {p.address && (
@@ -159,7 +163,7 @@ export default function Contact({ profile, socials }: ContactProps) {
             </div>
             
             {/* Right Contact Form Column */}
-            <div className="right-section col-lg-7" data-aos="fade-left" data-aos-delay="400">
+            <div className="right-section col-lg-7">
               <div className="get-in-touch glass-card">
                 <h4 className="form-card-title mb-4">Send a Message</h4>
                 
