@@ -30,6 +30,15 @@
     justify-content: space-between;
     padding: 12px 24px;
     height: 60px;
+
+    @media (max-width: 575px) {
+      padding: 10px 16px;
+      height: 52px;
+    }
+    @media (max-width: 375px) {
+      padding: 8px 12px;
+      height: 48px;
+    }
   }
 
   .nav-logo {
@@ -37,6 +46,13 @@
     font-weight: 800;
     text-decoration: none;
     letter-spacing: -0.02em;
+
+    @media (max-width: 575px) {
+      font-size: 17px;
+    }
+    @media (max-width: 375px) {
+      font-size: 15px;
+    }
 
     .gradient-text {
       background: linear-gradient(135deg, $cyan-accent, $violet-accent);
@@ -95,6 +111,13 @@
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @media (max-width: 575px) {
+      gap: 10px;
+    }
+    @media (max-width: 375px) {
+      gap: 8px;
+    }
 
     .theme-switch-pill {
       position: relative;
@@ -180,6 +203,12 @@
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.05);
+
+      @media (max-width: 575px) {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+      }
 
       &:hover {
         color: $violet-accent;

@@ -11,6 +11,16 @@
     padding-top: 110px;
     padding-bottom: 90px;
 
+    @include media-breakpoint-down-lg {
+        padding-top: 90px;
+        padding-bottom: 60px;
+    }
+    @include media-breakpoint-down-sm {
+        padding-top: 80px;
+        padding-bottom: 40px;
+        min-height: auto;
+    }
+
     .banner-bg-grid {
         position: absolute;
         inset: 0;
@@ -35,18 +45,28 @@
         &.primary-glow {
             width: 450px;
             height: 450px;
-            background: $cyan-accent; // sunset orange
+            background: $cyan-accent;
             top: 10%;
             left: 5%;
+
+            @include media-breakpoint-down-sm {
+                width: 250px;
+                height: 250px;
+            }
         }
 
         &.secondary-glow {
             width: 550px;
             height: 550px;
-            background: $violet-accent; // gold
+            background: $violet-accent;
             bottom: 5%;
             right: 8%;
             animation-delay: -5s;
+
+            @include media-breakpoint-down-sm {
+                width: 300px;
+                height: 300px;
+            }
         }
     }
 
@@ -65,6 +85,11 @@
             border-radius: 30px;
             margin-bottom: 24px;
             box-shadow: 0 4px 15px rgba(255, 126, 64, 0.05);
+
+            @include media-breakpoint-down-sm {
+                padding: 6px 14px;
+                margin-bottom: 16px;
+            }
             
             .welcome-pulse {
                 width: 8px;
@@ -81,6 +106,11 @@
                 text-transform: uppercase;
                 letter-spacing: 0.2em;
                 color: $cyan-accent;
+
+                @include media-breakpoint-down-sm {
+                    font-size: 10px;
+                    letter-spacing: 0.12em;
+                }
             }
         }
 
@@ -97,6 +127,16 @@
             @include media-breakpoint-down-lg {
                 font-size: 48px;
             }
+            @include media-breakpoint-down-md {
+                font-size: 42px;
+            }
+            @include media-breakpoint-down-sm {
+                font-size: 34px;
+                margin-bottom: 12px;
+            }
+            @include media-breakpoint-down-xs {
+                font-size: 28px;
+            }
         }
 
         .hero-title-sub {
@@ -110,6 +150,13 @@
 
             @include media-breakpoint-down-lg {
                 font-size: 22px;
+            }
+            @include media-breakpoint-down-sm {
+                font-size: 18px;
+                margin-bottom: 14px;
+            }
+            @include media-breakpoint-down-xs {
+                font-size: 16px;
             }
         }
 
@@ -125,12 +172,28 @@
                 font-size: 15px;
                 margin-inline: auto;
             }
+            @include media-breakpoint-down-sm {
+                font-size: 14px;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+            @include media-breakpoint-down-xs {
+                font-size: 13px;
+            }
         }
 
         // Stats bar styling
         .developer-stats-bar {
             display: flex;
             gap: 16px;
+
+            @include media-breakpoint-down-sm {
+                gap: 10px;
+            }
+            @include media-breakpoint-down-xs {
+                flex-direction: column;
+                gap: 8px;
+            }
 
             .stat-tile {
                 display: flex;
@@ -143,6 +206,12 @@
                 backdrop-filter: blur(10px);
                 transition: all 0.3s ease;
 
+                @include media-breakpoint-down-sm {
+                    gap: 10px;
+                    padding: 10px 14px;
+                    border-radius: 12px;
+                }
+
                 &:hover {
                     transform: translateY(-2px);
                     border-color: rgba(255, 126, 64, 0.15);
@@ -151,6 +220,10 @@
 
                 .stat-icon {
                     font-size: 22px;
+
+                    @include media-breakpoint-down-sm {
+                        font-size: 18px;
+                    }
                     
                     &.orange-icon { color: $cyan-accent; }
                     &.gold-icon { color: $violet-accent; }
@@ -165,6 +238,10 @@
                         font-size: 16px;
                         font-weight: 800;
                         color: $white;
+
+                        @include media-breakpoint-down-sm {
+                            font-size: 14px;
+                        }
                     }
 
                     .stat-label {
@@ -173,6 +250,10 @@
                         color: $text-muted;
                         text-transform: uppercase;
                         letter-spacing: 0.05em;
+
+                        @include media-breakpoint-down-sm {
+                            font-size: 10px;
+                        }
                     }
                 }
             }
@@ -180,9 +261,20 @@
 
         // CTA buttons and social pills
         .cta-actions-row {
+            @include media-breakpoint-down-sm {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 12px !important;
+            }
+
             .hero-socials-group {
                 display: flex;
                 gap: 12px;
+
+                @include media-breakpoint-down-sm {
+                    gap: 8px;
+                    justify-content: center;
+                }
 
                 .social-pill-btn {
                     display: inline-flex;
@@ -197,6 +289,12 @@
                     font-weight: 600;
                     text-decoration: none;
                     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+                    @include media-breakpoint-down-sm {
+                        padding: 8px 16px;
+                        font-size: 13px;
+                        gap: 6px;
+                    }
 
                     svg {
                         font-size: 16px;
@@ -237,6 +335,14 @@
                 width: 250px;
                 height: 300px;
             }
+            @include media-breakpoint-down-sm {
+                width: 200px;
+                height: 240px;
+            }
+            @include media-breakpoint-down-xs {
+                width: 180px;
+                height: 220px;
+            }
 
             .isometric-glow-ring {
                 position: absolute;
@@ -258,6 +364,10 @@
                 transform: rotate(-5deg) translate(-10px, -5px);
                 z-index: 2;
                 transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+                @include media-breakpoint-down-sm {
+                    border-radius: 20px;
+                }
             }
 
             .avatar-frame-border {
@@ -270,12 +380,21 @@
                 box-shadow: 0 25px 45px rgba(0, 0, 0, 0.45);
                 transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
+                @include media-breakpoint-down-sm {
+                    border-radius: 20px;
+                    padding: 3px;
+                }
+
                 .avatar-image-inner {
                     width: 100%;
                     height: 100%;
                     border-radius: 26px;
                     overflow: hidden;
                     background: #141418;
+
+                    @include media-breakpoint-down-sm {
+                        border-radius: 17px;
+                    }
 
                     .hero-avatar-portrait {
                         width: 100%;
@@ -308,6 +427,12 @@
                     right: -10px;
                     padding: 8px 14px;
                 }
+                @include media-breakpoint-down-sm {
+                    right: -5px;
+                    bottom: 10px;
+                    padding: 6px 12px;
+                    gap: 6px;
+                }
 
                 .pulse-dot {
                     width: 8px;
@@ -316,6 +441,11 @@
                     border-radius: 50%;
                     box-shadow: 0 0 10px #10b981;
                     animation: pulse-green 2s infinite;
+
+                    @include media-breakpoint-down-sm {
+                        width: 6px;
+                        height: 6px;
+                    }
                 }
 
                 .status-label {
@@ -324,6 +454,10 @@
                     color: $white;
                     letter-spacing: 0.05em;
                     text-transform: uppercase;
+
+                    @include media-breakpoint-down-sm {
+                        font-size: 9px;
+                    }
                 }
             }
 
@@ -357,6 +491,10 @@
         z-index: 2;
         pointer-events: none;
         opacity: 0.08;
+
+        @include media-breakpoint-down-sm {
+            display: none;
+        }
         
         &.bubble-1 {
             width: 300px;
@@ -392,6 +530,11 @@
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
+
+        // Hide on mobile — decorative only, wastes space
+        @include media-breakpoint-down-md {
+            display: none;
+        }
         
         body.light-theme & {
             background: rgba(0, 0, 0, 0.015);
