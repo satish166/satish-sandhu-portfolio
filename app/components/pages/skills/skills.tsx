@@ -1,4 +1,6 @@
+'use client';
 
+import React, { useState, useEffect } from "react";
 import "./skills.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
@@ -48,6 +50,13 @@ interface SkillsProps {
 
 export default function Skills({ skills }: SkillsProps) {
   const list = skills || [];
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (list.length === 0) return null;
 
   const renderIcon = (icon: string, name: string) => {
     // Inline Custom SVGs to support theme-aware colors and bypass caching
@@ -122,14 +131,13 @@ export default function Skills({ skills }: SkillsProps) {
     }
     
     // Otherwise check custom SVGs or render directly if it is a url
-    // Append cache-busting query parameter to force browser to reload newly updated colorful SVGs
     const srcPath = customSvgMap[icon] ? `${customSvgMap[icon]}?v=4` : `${icon}?v=4`;
     return <img src={srcPath} alt={name} className="skill-icon-img" />;
   };
 
   return (
     <>
-      <section className="skill-section" id="skills" data-aos="fade-up">
+      <section className="skill-section" id="skills">
         <div className="skills-content container">
           <h2 className="heading">Skill & Expertise</h2>
           <div className="row mt-4">
@@ -158,4 +166,4 @@ export default function Skills({ skills }: SkillsProps) {
       </section>
     </>
   );
-}
+}

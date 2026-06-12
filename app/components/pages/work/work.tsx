@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,6 +38,11 @@ const getProjectTechTags = (name: string): string[] => {
 export default function Work({ projects }: WorkProps) {
   const list = projects || [];
   const sliderRef = useRef<Slider>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (list.length === 0) return null;
 
@@ -62,9 +67,75 @@ export default function Work({ projects }: WorkProps) {
     ]
   };
 
+  // SSR / Hydration Fallback to prevent layout shifts & resolve Slick Slider responsiveness issues on actual devices
+  if (!mounted) {
+    return (
+      <section className="work-section overflow-hidden" id="liveprojects">
+        <div className="work-content container">
+          <div className="d-flex align-items-center justify-content-between flex-wrap mb-4">
+            <div>
+              <h2 className="heading">Live Projects</h2>
+              <h6 className="section-subheading mb-0">A showcase of production-ready web platforms that blend creativity with functionality.</h6>
+            </div>
+          </div>
+
+          <div className="row g-4 mt-4">
+            {list.map((proj) => (
+              <div className="col-12 col-lg-6 px-2 pb-3" key={proj.id}>
+                <div className="project-card-wrapper">
+                  <div className="browser-mockup glass-card">
+                    <div className="browser-header">
+                      <div className="browser-dots">
+                        <span className="dot red"></span>
+                        <span className="dot yellow"></span>
+                        <span className="dot green"></span>
+                      </div>
+                      <div className="browser-address-bar">
+                        {proj.link.replace("https://", "").replace("www.", "").replace(/\/$/, "")}
+                      </div>
+                    </div>
+                    
+                    <div className="browser-body">
+                      <div className="image-overlay-container">
+                        <img src={proj.image || "/uploads/poppin.png"} alt={proj.name} className="browser-image" />
+                        <div className="browser-hover-overlay">
+                          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="explore-btn">
+                            Visit Live Site
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="project-details">
+                      <div className="tags-container">
+                        {getProjectTechTags(proj.name).map((tag, i) => (
+                          <span className="tech-badge" key={i}>{tag}</span>
+                        ))}
+                      </div>
+                      <h3 className="project-title">{proj.name}</h3>
+                      <p className="project-description">{proj.description}</p>
+                      <div className="action-row">
+                        <a href={proj.link} target="_blank" rel="noopener noreferrer" className="live-link">
+                          <span>Launch Live Site</span>
+                          <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <>
-      <section className="work-section overflow-hidden" id="liveprojects" data-aos="fade-up">
+      <section className="work-section overflow-hidden" id="liveprojects">
         <div className="work-content container">
           <div className="d-flex align-items-center justify-content-between flex-wrap mb-4">
             <div>

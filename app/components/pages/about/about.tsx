@@ -17,18 +17,18 @@ export default function About({ profile }: AboutProps) {
 
   return (
     <>
-      <section className="about-section overflow-hidden" id="about" data-aos="fade-up" data-aos-delay="200">
+      <section className="about-section overflow-hidden" id="about">
         <div className="container">
           <div className="about-content">
-            <h2 className="heading" data-aos="fade-right">About Me</h2>
-            <h6 className="about-bio" data-aos="fade-right">
+            <h2 className="heading">About Me</h2>
+            <h6 className="about-bio">
               {p.about || "I am a Frontend Developer with experience in building high-performance, user-centric web applications."}
             </h6>
           </div>
           <div className="personal-info">
             <div className="row align-items-center">
               {/* Profile Image Wrapper Column */}
-              <div className="col-lg-4" data-aos="fade-right">
+              <div className="col-lg-4">
                 <div className="about-image-wrapper">
                   <div className="image-border-glow"></div>
                   <div className="about-image">
@@ -38,7 +38,7 @@ export default function About({ profile }: AboutProps) {
               </div>
               
               {/* Personal Details Dashboard Tiles Column */}
-              <div className="col-lg-8" data-aos="fade-left">
+              <div className="col-lg-8">
                 <h3 className="about-subtitle">{p.subtitle || "UI/UX Designer & Web Developer"}</h3>
                 
                 <div className="personal-details-grid mt-4">
