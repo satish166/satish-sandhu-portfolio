@@ -464,7 +464,9 @@ export async function PUT(request: Request) {
     const config = await getAdminConfig();
 
     if (reset) {
-      const success = await saveAdminConfig({ password: "Sandhu@123" });
+      // Only reset the password — preserve users, SMTP settings, biometric, etc.
+      config.password = "Sandhu@123";
+      const success = await saveAdminConfig(config);
       if (!success) {
         return NextResponse.json({ error: "Failed to reset password" }, { status: 500 });
       }
