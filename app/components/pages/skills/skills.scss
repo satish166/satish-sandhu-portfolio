@@ -5,11 +5,14 @@
     padding-block: 80px;
     background-color: transparent;
 
-    @include media-breakpoint-down-md {
+    @media (max-width: 768px) {
         padding-block: 50px;
     }
-    @include media-breakpoint-down-sm {
-        padding-block: 40px;
+    @media (max-width: 480px) {
+        padding-block: 30px;
+        .container {
+            padding-inline: 12px;
+        }
     }
 
     .col-xl-4 {
@@ -30,7 +33,7 @@
             border-bottom: 1px solid $border-glass;
             padding-bottom: 12px;
 
-            @include media-breakpoint-down-sm {
+            @media (max-width: 575px) {
                 font-size: 17px;
                 margin-bottom: 16px;
                 padding-bottom: 10px;
@@ -45,12 +48,18 @@
             grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             gap: 12px;
 
-            @include media-breakpoint-down-sm {
-                grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+            @media (max-width: 991px) {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 10px;
+            }
+
+            @media (max-width: 575px) {
+                grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
             }
-            @include media-breakpoint-down-xs {
-                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+
+            @media (max-width: 360px) {
+                grid-template-columns: repeat(3, 1fr);
                 gap: 6px;
             }
 

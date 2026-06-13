@@ -1,3 +1,10 @@
 {
-  "password": "Sandhu@123"
+  "password": "Sandhu@123",
+  "users": [
+    {
+      "username": "abc@gmail.com",
+      "password": "AbcPass123",
+      "permission": "Read Only"
+    }
+  ]
 }
