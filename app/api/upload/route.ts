@@ -2,14 +2,78 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = "force-dynamic";
+
+const CONFIG_FILE_PATH = path.join(process.cwd(), "app", "data", "admin-config.json");
+const KV_ENABLED = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+
+async function kvExecute(command: string[]): Promise<any> {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  const response = await fetch(url!, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(command),
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`KV command failed: ${text}`);
+  }
+  const resData = await response.json();
+  return resData.result;
+}
+
+async function getAdminConfig(): Promise<any> {
+  if (KV_ENABLED) {
+    try {
+      const configStr = await kvExecute(["GET", "admin_config"]);
+      if (configStr) {
+        const parsed = JSON.parse(configStr);
+        if (!parsed.password) parsed.password = "Sandhu@123";
+        return parsed;
+      }
+    } catch (err) {
+      console.error("KV error reading admin config in upload:", err);
+    }
+  }
+  try {
+    if (!fs.existsSync(CONFIG_FILE_PATH)) {
+      return { password: "Sandhu@123" };
+    }
+    const fileContents = fs.readFileSync(CONFIG_FILE_PATH, "utf8");
+    const parsed = JSON.parse(fileContents);
+    if (!parsed.password) parsed.password = "Sandhu@123";
+    return parsed;
+  } catch (error) {
+    console.error("Error reading admin-config data in upload:", error);
+    return { password: "Sandhu@123" };
+  }
+}
+
 export async function POST(request: Request) {
   try {
-    // Check Authorization Password
     const passwordHeader = request.headers.get("x-admin-password");
-    const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
+    const usernameHeader = request.headers.get("x-admin-username");
+    const config = await getAdminConfig();
 
-    if (passwordHeader !== adminPassword) {
-      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    if (!usernameHeader || usernameHeader === "admin") {
+      if (passwordHeader !== config.password) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+    } else {
+      const matchedUser = (config.users || []).find(
+        (u: any) => u.username.toLowerCase() === usernameHeader.toLowerCase() && u.password === passwordHeader
+      );
+      if (!matchedUser) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+      if (matchedUser.permission === "Read Only") {
+        return NextResponse.json({ error: "You do not have permission to edit" }, { status: 403 });
+      }
     }
 
     const formData = await request.formData();

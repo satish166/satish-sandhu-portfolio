@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import fs from "fs";
 import path from "path";
 import nodemailer from "nodemailer";
@@ -106,12 +107,21 @@ async function saveMessages(messages: any[]): Promise<boolean> {
 
 export async function GET(request: Request) {
   try {
-    // Check Authorization Password for Admin reading messages
     const passwordHeader = request.headers.get("x-admin-password");
+    const usernameHeader = request.headers.get("x-admin-username");
     const config = await getAdminConfig();
 
-    if (passwordHeader !== config.password) {
-      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    if (!usernameHeader || usernameHeader === "admin") {
+      if (passwordHeader !== config.password) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+    } else {
+      const matchedUser = (config.users || []).find(
+        (u: any) => u.username.toLowerCase() === usernameHeader.toLowerCase() && u.password === passwordHeader
+      );
+      if (!matchedUser) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
     }
 
     const messages = await getMessages();
@@ -193,10 +203,23 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const passwordHeader = request.headers.get("x-admin-password");
+    const usernameHeader = request.headers.get("x-admin-username");
     const config = await getAdminConfig();
 
-    if (passwordHeader !== config.password) {
-      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    if (!usernameHeader || usernameHeader === "admin") {
+      if (passwordHeader !== config.password) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+    } else {
+      const matchedUser = (config.users || []).find(
+        (u: any) => u.username.toLowerCase() === usernameHeader.toLowerCase() && u.password === passwordHeader
+      );
+      if (!matchedUser) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+      if (matchedUser.permission === "Read Only") {
+        return NextResponse.json({ error: "You do not have permission to edit" }, { status: 403 });
+      }
     }
 
     const { searchParams } = new URL(request.url);

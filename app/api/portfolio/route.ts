@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import fs from "fs";
 import path from "path";
 
@@ -291,10 +292,23 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const passwordHeader = request.headers.get("x-admin-password");
-    const adminPassword = await getAdminPassword();
+    const usernameHeader = request.headers.get("x-admin-username");
+    const config = await getAdminConfig();
 
-    if (passwordHeader !== adminPassword) {
-      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    if (!usernameHeader || usernameHeader === "admin") {
+      if (passwordHeader !== config.password) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+    } else {
+      const matchedUser = (config.users || []).find(
+        (u: any) => u.username.toLowerCase() === usernameHeader.toLowerCase() && u.password === passwordHeader
+      );
+      if (!matchedUser) {
+        return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+      }
+      if (matchedUser.permission === "Read Only") {
+        return NextResponse.json({ error: "You do not have permission to edit" }, { status: 403 });
+      }
     }
 
     const updatedData = await request.json();
