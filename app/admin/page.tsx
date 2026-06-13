@@ -58,6 +58,7 @@ export default function AdminPanel() {
   const [loginTab, setLoginTab] = useState<"passcode" | "team">("passcode");
   const [teamUsername, setTeamUsername] = useState("");
   const [teamPassword, setTeamPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const [subUsers, setSubUsers] = useState<any[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
@@ -497,19 +498,22 @@ export default function AdminPanel() {
     };
     checkBiometricSetup();
 
-    const savedPass = localStorage.getItem("portfolio_admin_pass");
-    const savedUser = localStorage.getItem("portfolio_admin_user") || "";
-    const savedPermission = (localStorage.getItem("portfolio_admin_permission") || "Full Access") as "Read Only" | "Full Access";
+    // Check localStorage first (Remember Me), then sessionStorage (session-only)
+    const savedPass = localStorage.getItem("portfolio_admin_pass") || sessionStorage.getItem("portfolio_admin_pass");
+    const savedUser = localStorage.getItem("portfolio_admin_user") || sessionStorage.getItem("portfolio_admin_user") || "";
+    const savedPermission = (localStorage.getItem("portfolio_admin_permission") || sessionStorage.getItem("portfolio_admin_permission") || "Full Access") as "Read Only" | "Full Access";
+    const wasRemembered = !!localStorage.getItem("portfolio_admin_pass");
     if (savedPass) {
+      setRememberMe(wasRemembered);
       setPasscode(savedPass);
       setCurrentUser({ username: savedUser, permission: savedPermission });
-      verifyAndLoad(savedPass, savedUser);
+      verifyAndLoad(savedPass, savedUser, wasRemembered);
     } else {
       setLoading(false);
     }
   }, []);
 
-  const verifyAndLoad = async (pass: string, user: string = "") => {
+  const verifyAndLoad = async (pass: string, user: string = "", remember: boolean = rememberMe) => {
     setLoading(true);
     try {
       const authRes = await fetch("/api/auth", {
@@ -543,9 +547,22 @@ export default function AdminPanel() {
           setPasscode(pass); // Update passcode state to keep in sync
           setAuthorized(true);
           fetchSmtpConfig(pass);
-          localStorage.setItem("portfolio_admin_pass", pass);
-          localStorage.setItem("portfolio_admin_user", loggedInUser.username);
-          localStorage.setItem("portfolio_admin_permission", loggedInUser.permission);
+          // Save to localStorage (persistent) or sessionStorage (tab-only) based on Remember Me
+          if (remember) {
+            localStorage.setItem("portfolio_admin_pass", pass);
+            localStorage.setItem("portfolio_admin_user", loggedInUser.username);
+            localStorage.setItem("portfolio_admin_permission", loggedInUser.permission);
+            sessionStorage.removeItem("portfolio_admin_pass");
+            sessionStorage.removeItem("portfolio_admin_user");
+            sessionStorage.removeItem("portfolio_admin_permission");
+          } else {
+            sessionStorage.setItem("portfolio_admin_pass", pass);
+            sessionStorage.setItem("portfolio_admin_user", loggedInUser.username);
+            sessionStorage.setItem("portfolio_admin_permission", loggedInUser.permission);
+            localStorage.removeItem("portfolio_admin_pass");
+            localStorage.removeItem("portfolio_admin_user");
+            localStorage.removeItem("portfolio_admin_permission");
+          }
           setErrorMsg("");
         } else {
           setErrorMsg("Failed to load portfolio details.");
@@ -567,10 +584,10 @@ export default function AdminPanel() {
     e.preventDefault();
     if (loginTab === "team") {
       if (!teamUsername || !teamPassword) return;
-      verifyAndLoad(teamPassword, teamUsername);
+      verifyAndLoad(teamPassword, teamUsername, rememberMe);
     } else {
       if (!passcode) return;
-      verifyAndLoad(passcode, "");
+      verifyAndLoad(passcode, "", rememberMe);
     }
   };
 
@@ -578,6 +595,10 @@ export default function AdminPanel() {
     localStorage.removeItem("portfolio_admin_pass");
     localStorage.removeItem("portfolio_admin_user");
     localStorage.removeItem("portfolio_admin_permission");
+    sessionStorage.removeItem("portfolio_admin_pass");
+    sessionStorage.removeItem("portfolio_admin_user");
+    sessionStorage.removeItem("portfolio_admin_permission");
+    setRememberMe(false);
     setAuthorized(false);
     setPasscode("");
     setTeamUsername("");
