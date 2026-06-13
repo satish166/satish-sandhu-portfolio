@@ -6,6 +6,8 @@ export const dynamic = "force-dynamic";
 
 const CONFIG_FILE_PATH = path.join(process.cwd(), "app", "data", "admin-config.json");
 const KV_ENABLED = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+// Vercel Blob is available when BLOB_READ_WRITE_TOKEN env var is set
+const BLOB_ENABLED = !!process.env.BLOB_READ_WRITE_TOKEN;
 
 async function kvExecute(command: string[]): Promise<any> {
   const url = process.env.KV_REST_API_URL;
@@ -77,7 +79,7 @@ export async function POST(request: Request) {
     }
 
     const formData = await request.formData();
-    const file = formData.get("file") as Blob | null;
+    const file = formData.get("file") as File | null;
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
@@ -88,28 +90,48 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Uploaded file must be an image" }, { status: 400 });
     }
 
+    // Generate unique filename
+    const originalName = file.name || "image.png";
+    const extension = path.extname(originalName) || ".png";
+    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
+
+    // ── Production: Use Vercel Blob ──────────────────────────────────────────
+    if (BLOB_ENABLED) {
+      try {
+        const { put } = await import("@vercel/blob");
+        const blob = await put(`uploads/${uniqueName}`, file, {
+          access: "public",
+          contentType: file.type,
+        });
+        return NextResponse.json({ message: "File uploaded successfully", url: blob.url });
+      } catch (blobErr: any) {
+        console.error("Vercel Blob upload failed:", blobErr);
+        return NextResponse.json(
+          { error: "Image upload failed: " + (blobErr.message || "Blob storage error") },
+          { status: 500 }
+        );
+      }
+    }
+
+    // ── Development: Save to local public/uploads ────────────────────────────
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Ensure directory exists
     const uploadDir = path.join(process.cwd(), "public", "uploads");
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    // Create unique filename
-    const originalName = (file as any).name || "image.png";
-    const extension = path.extname(originalName) || ".png";
-    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
     const filePath = path.join(uploadDir, uniqueName);
-
-    // Save file
     fs.writeFileSync(filePath, buffer);
 
     const assetUrl = `/uploads/${uniqueName}`;
     return NextResponse.json({ message: "File uploaded successfully", url: assetUrl });
   } catch (error: any) {
     console.error("Error uploading file:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Upload failed: " + (error.message || "Internal Server Error") },
+      { status: 500 }
+    );
   }
 }
