@@ -4,8 +4,7 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 
-import NavBar from "./components/navbar/navbar";
-import MainContent from "./components/main-content/main";
+import PortfolioContainer from "./components/portfolio-container";
 
 const KV_ENABLED = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
 
@@ -56,10 +55,7 @@ export default async function Portfolio() {
 
   return (
     <>
-      <div className="page-layout">
-        <NavBar data={portfolioData} />
-        <MainContent data={portfolioData} />
-      </div>
+      <PortfolioContainer data={portfolioData} />
     </>
   );
 }

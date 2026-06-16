@@ -178,6 +178,8 @@
 
                         body.light-theme & {
                             color: #ffffff !important;
+                            background: linear-gradient(135deg, $cyan-accent, $violet-accent) !important;
+                            border-color: transparent !important;
                         }
                     }
                 }
@@ -249,6 +251,14 @@
                             body.light-theme & {
                                 color: #ffffff !important;
                                 box-shadow: 0 8px 18px rgba(255, 126, 64, 0.15) !important;
+                                &.linkedin {
+                                    background: #0a66c2 !important;
+                                    border-color: transparent !important;
+                                }
+                                &.whatsapp {
+                                    background: #25d366 !important;
+                                    border-color: transparent !important;
+                                }
                             }
                         }
                     }

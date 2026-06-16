@@ -185,6 +185,12 @@ function calculateDiff(oldData: any, newData: any): string[] {
   compareKeys(oldData.profile, newData.profile, "Profile");
   compareKeys(oldData.socials, newData.socials, "Socials");
 
+  if (oldData.showHeader !== newData.showHeader) {
+    const oldVal = oldData.showHeader !== false ? "Show" : "Hide";
+    const newVal = newData.showHeader !== false ? "Show" : "Hide";
+    changes.push(`Header Visibility: "${oldVal}" ➔ "${newVal}"`);
+  }
+
   const compareProjects = (arr1: any[], arr2: any[], label: string) => {
     const map1 = new Map((arr1 || []).map((p) => [p.id, p]));
     const map2 = new Map((arr2 || []).map((p) => [p.id, p]));
@@ -215,6 +221,22 @@ function calculateDiff(oldData: any, newData: any): string[] {
 
   compareProjects(oldData.liveProjects, newData.liveProjects, "Live Project");
   compareProjects(oldData.personalProjects, newData.personalProjects, "Personal Project");
+
+  // Compare Navigation
+  const origNav = oldData.navigation || [];
+  const currNav = newData.navigation || [];
+  const maxNavLen = Math.max(origNav.length, currNav.length);
+  for (let i = 0; i < maxNavLen; i++) {
+    const origItem = origNav[i];
+    const currItem = currNav[i];
+    if (!origItem && currItem) {
+      changes.push(`Navigation: Added "${currItem.label}" (${currItem.href})`);
+    } else if (origItem && !currItem) {
+      changes.push(`Navigation: Removed "${origItem.label}"`);
+    } else if (origItem && currItem && JSON.stringify(origItem) !== JSON.stringify(currItem)) {
+      changes.push(`Navigation [${origItem.label}]: Modified`);
+    }
+  }
 
   // Compare Skills
   const origSkills = oldData.skills || [];

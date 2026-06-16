@@ -179,5 +179,37 @@
       "link": "https://wedding-invitation-flax-omega.vercel.app/",
       "btnText": "Visit Wedding Invitation"
     }
+  ],
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "#home",
+      "icon": "faHouse"
+    },
+    {
+      "label": "About",
+      "href": "#about",
+      "icon": "faUser"
+    },
+    {
+      "label": "Skills",
+      "href": "#skills",
+      "icon": "faFile"
+    },
+    {
+      "label": "Personal Projects",
+      "href": "#personalprojects",
+      "icon": "faLaptopCode"
+    },
+    {
+      "label": "Live Projects",
+      "href": "#liveprojects",
+      "icon": "faLaptopCode"
+    },
+    {
+      "label": "Contact",
+      "href": "#contactus",
+      "icon": "faAddressBook"
+    }
   ]
 }

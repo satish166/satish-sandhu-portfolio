@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft, faSave, faPlus, faTrash, faEdit,
   faUser, faTools, faBriefcase, faProjectDiagram, faUpload, faLock, faEnvelope, faHistory, faSignOutAlt,
-  faCheck, faTimes, faEye, faEyeSlash
+  faCheck, faTimes, faEye, faEyeSlash,
+  faCompass, faLink, faList, faArrowUp, faArrowDown
 } from "@fortawesome/free-solid-svg-icons";
 
 function base64ToArrayBuffer(base64: string): ArrayBuffer {
@@ -956,6 +957,43 @@ export default function AdminPanel() {
     }
   };
 
+  // Navigation handlers
+  const updateNavigationItemField = (idx: number, key: string, value: string) => {
+    const current = portfolioData.navigation || [];
+    const updated = current.map((item: any, i: number) => {
+      if (i === idx) return { ...item, [key]: value };
+      return item;
+    });
+    setPortfolioData({ ...portfolioData, navigation: updated });
+  };
+
+  const addNavigationItem = () => {
+    const current = portfolioData.navigation || [];
+    const updated = [...current, { label: "New Tab", href: "#new-section", icon: "faLink" }];
+    setPortfolioData({ ...portfolioData, navigation: updated });
+  };
+
+  const removeNavigationItem = (idx: number) => {
+    const current = portfolioData.navigation || [];
+    const updated = current.filter((_: any, i: number) => i !== idx);
+    setPortfolioData({ ...portfolioData, navigation: updated });
+  };
+
+  const moveNavigationItem = (idx: number, direction: "up" | "down") => {
+    const current = portfolioData.navigation || [];
+    const list = [...current];
+    if (direction === "up" && idx > 0) {
+      const temp = list[idx];
+      list[idx] = list[idx - 1];
+      list[idx - 1] = temp;
+    } else if (direction === "down" && idx < list.length - 1) {
+      const temp = list[idx];
+      list[idx] = list[idx + 1];
+      list[idx + 1] = temp;
+    }
+    setPortfolioData({ ...portfolioData, navigation: list });
+  };
+
   // Skills handlers
   const updateSkillCategoryName = (catIdx: number, name: string) => {
     const updated = [...portfolioData.skills];
@@ -1108,6 +1146,29 @@ export default function AdminPanel() {
         changes.push(`Personal Project: Added "${p2.name || "Untitled"}"`);
       }
     });
+
+    // Compare Navigation
+    const origNav = originalData.navigation || [];
+    const currNav = portfolioData.navigation || [];
+    const maxNavLen = Math.max(origNav.length, currNav.length);
+    for (let i = 0; i < maxNavLen; i++) {
+      const origItem = origNav[i];
+      const currItem = currNav[i];
+      if (!origItem && currItem) {
+        changes.push(`Navigation: Added "${currItem.label}" (${currItem.href})`);
+      } else if (origItem && !currItem) {
+        changes.push(`Navigation: Removed "${origItem.label}"`);
+      } else if (origItem && currItem && JSON.stringify(origItem) !== JSON.stringify(currItem)) {
+        changes.push(`Navigation [${origItem.label}]: Modified`);
+      }
+    }
+
+    // Compare Show Header Preference
+    if (originalData.showHeader !== portfolioData.showHeader) {
+      const origVal = originalData.showHeader !== false ? "Show" : "Hide";
+      const currVal = portfolioData.showHeader !== false ? "Show" : "Hide";
+      changes.push(`Header Visibility: "${origVal}" ➔ "${currVal}"`);
+    }
 
     return changes;
   };
@@ -1592,6 +1653,12 @@ export default function AdminPanel() {
               <FontAwesomeIcon icon={faTools} /> Skills Manager
             </button>
             <button
+              className={`tab-btn ${activeTab === "navigation" ? "active" : ""}`}
+              onClick={() => setActiveTab("navigation")}
+            >
+              <FontAwesomeIcon icon={faCompass} /> Header Navigation
+            </button>
+            <button
               className={`tab-btn ${activeTab === "live" ? "active" : ""}`}
               onClick={() => setActiveTab("live")}
             >
@@ -1777,6 +1844,147 @@ export default function AdminPanel() {
                         onChange={(e) => handleSocialsChange("whatsapp", e.target.value)}
                       />
                     </div>
+
+                    {/* Preferences / Settings */}
+                    <h4 className="mt-4 border-top pt-3">Preferences / Settings</h4>
+                    <div className="col-md-12 mb-3">
+                      <div className="form-check form-switch mt-2">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id="showHeaderToggle"
+                          checked={portfolioData.showHeader !== false}
+                          onChange={(e) => setPortfolioData({
+                            ...portfolioData,
+                            showHeader: e.target.checked
+                          })}
+                          style={{
+                            cursor: "pointer",
+                            width: "2.5em",
+                            height: "1.25em",
+                            marginRight: "10px",
+                            float: "left"
+                          }}
+                        />
+                        <label className="form-check-label" htmlFor="showHeaderToggle" style={{ cursor: "pointer", fontSize: "14px", fontWeight: "600" }}>
+                          Show Header / Navigation Bar
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            )}
+
+            {/* HEADER NAVIGATION TAB */}
+            {activeTab === "navigation" && (
+              <div>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h3 className="tab-title">Header Navigation Tabs</h3>
+                  {currentUser.permission !== "Read Only" && (
+                    <button onClick={addNavigationItem} className="btn btn-outline-info rounded-pill px-3">
+                      <FontAwesomeIcon icon={faPlus} /> Add Nav Tab
+                    </button>
+                  )}
+                </div>
+
+                <fieldset disabled={currentUser.permission === "Read Only"} style={{ border: "none", padding: 0, margin: 0 }}>
+                  <div className="table-responsive">
+                    <table className="table table-dark table-hover align-middle">
+                      <thead>
+                        <tr>
+                          <th style={{ width: "25%" }}>Name / Label</th>
+                          <th style={{ width: "30%" }}>Target Link / Anchor</th>
+                          <th style={{ width: "25%" }}>Icon (FontAwesome)</th>
+                          <th style={{ width: "20%" }}>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(portfolioData.navigation || []).map((item: any, idx: number) => (
+                          <tr key={idx}>
+                            <td>
+                              <input
+                                type="text"
+                                className="form-control form-control-sm"
+                                value={item.label}
+                                onChange={(e) => updateNavigationItemField(idx, "label", e.target.value)}
+                                placeholder="e.g. Home"
+                                required
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="text"
+                                className="form-control form-control-sm"
+                                value={item.href}
+                                onChange={(e) => updateNavigationItemField(idx, "href", e.target.value)}
+                                placeholder="e.g. #about or /blog"
+                                required
+                              />
+                            </td>
+                            <td>
+                              <select
+                                className="form-select form-select-sm"
+                                value={item.icon || "faLink"}
+                                onChange={(e) => updateNavigationItemField(idx, "icon", e.target.value)}
+                              >
+                                <option value="faHouse">Home (House)</option>
+                                <option value="faUser">About (User)</option>
+                                <option value="faFile">Skills (File)</option>
+                                <option value="faLaptopCode">Projects (Laptop Code)</option>
+                                <option value="faAddressBook">Contact (Address Book)</option>
+                                <option value="faCompass">Compass</option>
+                                <option value="faLink">Link</option>
+                                <option value="faList">List</option>
+                                <option value="faCode">Code</option>
+                                <option value="faBriefcase">Briefcase</option>
+                                <option value="faGraduationCap">Degree / Graduation Cap</option>
+                                <option value="faCertificate">Certificate</option>
+                                <option value="faAward">Award</option>
+                                <option value="faBook">Book / Blog</option>
+                                <option value="faHeart">Heart</option>
+                                <option value="faPhone">Phone</option>
+                                <option value="faEnvelope">Envelope</option>
+                                <option value="faGlobe">Globe</option>
+                              </select>
+                            </td>
+                            <td>
+                              <div className="d-flex gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => moveNavigationItem(idx, "up")}
+                                  disabled={idx === 0}
+                                  className="btn btn-sm btn-outline-info"
+                                  title="Move Up"
+                                >
+                                  <FontAwesomeIcon icon={faArrowUp} />
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => moveNavigationItem(idx, "down")}
+                                  disabled={idx === (portfolioData.navigation || []).length - 1}
+                                  className="btn btn-sm btn-outline-info"
+                                  title="Move Down"
+                                >
+                                  <FontAwesomeIcon icon={faArrowDown} />
+                                </button>
+                                {currentUser.permission !== "Read Only" && (
+                                  <button
+                                    type="button"
+                                    onClick={() => removeNavigationItem(idx)}
+                                    className="btn btn-sm btn-outline-danger"
+                                    title="Delete"
+                                  >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                  </button>
+                                )}
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </fieldset>
               </div>
