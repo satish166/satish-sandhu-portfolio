@@ -417,6 +417,12 @@ body {
               $bg-dark;
   width: 100%;
 
+  &.no-header {
+    .main-content {
+      padding-top: 0 !important;
+    }
+  }
+
   .main-content {
     width: 100%;
     background: transparent;

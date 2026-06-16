@@ -86,7 +86,12 @@ export default function Work({ projects }: WorkProps) {
           <div className="row g-4 mt-4">
             {list.map((proj) => (
               <div className="col-12 col-lg-6 px-2 pb-3" key={proj.id}>
-                <div className="project-card-wrapper">
+                <a 
+                  href={proj.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="project-card-wrapper"
+                >
                   <div className="browser-mockup glass-card">
                     <div className="browser-header">
                       <div className="browser-dots">
@@ -103,9 +108,9 @@ export default function Work({ projects }: WorkProps) {
                       <div className="image-overlay-container">
                         <img src={proj.image || "/uploads/poppin.png"} alt={proj.name} className="browser-image" />
                         <div className="browser-hover-overlay">
-                          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="explore-btn">
+                          <span className="explore-btn">
                             Visit Live Site
-                          </a>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -119,16 +124,16 @@ export default function Work({ projects }: WorkProps) {
                       <h3 className="project-title">{proj.name}</h3>
                       <p className="project-description">{proj.description}</p>
                       <div className="action-row">
-                        <a href={proj.link} target="_blank" rel="noopener noreferrer" className="live-link">
+                        <span className="live-link">
                           <span>Launch Live Site</span>
                           <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             ))}
           </div>
@@ -138,7 +143,12 @@ export default function Work({ projects }: WorkProps) {
   }
 
   const renderCard = (proj: ProjectItem) => (
-    <div className="project-card-wrapper">
+    <a 
+      href={proj.link} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="project-card-wrapper"
+    >
       <div className="browser-mockup glass-card">
         {/* Browser Header / Title Bar */}
         <div className="browser-header">
@@ -157,9 +167,9 @@ export default function Work({ projects }: WorkProps) {
           <div className="image-overlay-container">
             <img src={proj.image || "/uploads/poppin.png"} alt={proj.name} className="browser-image" />
             <div className="browser-hover-overlay">
-              <a href={proj.link} target="_blank" rel="noopener noreferrer" className="explore-btn">
+              <span className="explore-btn">
                 Visit Live Site
-              </a>
+              </span>
             </div>
           </div>
         </div>
@@ -174,16 +184,16 @@ export default function Work({ projects }: WorkProps) {
           <h3 className="project-title">{proj.name}</h3>
           <p className="project-description">{proj.description}</p>
           <div className="action-row">
-            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="live-link">
+            <span className="live-link">
               <span>Launch Live Site</span>
               <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </a>
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 
   return (

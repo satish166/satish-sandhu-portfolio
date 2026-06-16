@@ -64,28 +64,33 @@ export default function PersonalProject({ projects }: PersonalProjectProps) {
           <div className="row g-4 mt-4">
             {items.map((item) => (
               <div className="col-12 col-lg-6 px-2 pb-3" key={item.id}>
-                <article className="personal-card glass-card d-flex flex-column w-100">
-                  <a className="visit-site-link" href={item.link} target="_blank" rel="noopener noreferrer">
+                <a 
+                  href={item.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="personal-card-wrapper-link"
+                >
+                  <article className="personal-card glass-card d-flex flex-column h-100 w-100">
                     <div className="image-wrapper">
                       <img src={item.image} alt={item.name} className="project-image" />
                       <div className="hover-action">
                         <span className="btn-visit">{item.btnText || "Visit Site"}</span>
                       </div>
                     </div>
-                  </a>
-                  <div className="about-project d-flex flex-column flex-grow-1">
-                    <h4 className="project-title-text">{item.name}</h4>
-                    <p className="project-desc">{item.description}</p>
-                    <div className="action-row mt-auto pt-3">
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="live-link">
-                        <span>{item.btnText || "Visit Project"}</span>
-                        <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ width: '16px', height: '16px', transition: 'transform 0.3s ease' }}>
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </a>
+                    <div className="about-project d-flex flex-column flex-grow-1">
+                      <h4 className="project-title-text">{item.name}</h4>
+                      <p className="project-desc">{item.description}</p>
+                      <div className="action-row mt-auto pt-3">
+                        <span className="live-link">
+                          <span>{item.btnText || "Visit Project"}</span>
+                          <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ width: '16px', height: '16px', transition: 'transform 0.3s ease' }}>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                </a>
               </div>
             ))}
           </div>
@@ -95,28 +100,33 @@ export default function PersonalProject({ projects }: PersonalProjectProps) {
   }
 
   const renderCard = (item: PersonalProjectItem) => (
-    <article className="personal-card glass-card d-flex flex-column w-100">
-      <a className="visit-site-link" href={item.link} target="_blank" rel="noopener noreferrer">
+    <a 
+      href={item.link} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="personal-card-wrapper-link"
+    >
+      <article className="personal-card glass-card d-flex flex-column h-100 w-100">
         <div className="image-wrapper">
           <img src={item.image} alt={item.name} className="project-image" />
           <div className="hover-action">
             <span className="btn-visit">{item.btnText || "Visit Site"}</span>
           </div>
         </div>
-      </a>
-      <div className="about-project d-flex flex-column flex-grow-1">
-        <h4 className="project-title-text">{item.name}</h4>
-        <p className="project-desc">{item.description}</p>
-        <div className="action-row mt-auto pt-3">
-          <a href={item.link} target="_blank" rel="noopener noreferrer" className="live-link">
-            <span>{item.btnText || "Visit Project"}</span>
-            <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ width: '16px', height: '16px', transition: 'transform 0.3s ease' }}>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+        <div className="about-project d-flex flex-column flex-grow-1">
+          <h4 className="project-title-text">{item.name}</h4>
+          <p className="project-desc">{item.description}</p>
+          <div className="action-row mt-auto pt-3">
+            <span className="live-link">
+              <span>{item.btnText || "Visit Project"}</span>
+              <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ width: '16px', height: '16px', transition: 'transform 0.3s ease' }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </a>
   );
 
   return (

@@ -1,0 +1,1108 @@
+// RyanCV layout styling
+@use '../../styles/components/variables' as *;
+
+// Define the primary green accent of RyanCV Dataops
+$ryancv-accent: #78cc6d;
+$ryancv-accent-glow: rgba(120, 204, 109, 0.3);
+
+.ryancv-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.4s ease;
+
+  @media (max-width: 767px) {
+    padding: 15px 10px;
+  }
+
+  // Background Theme
+  background: #12171b; // Default Dark
+
+  &.light-theme-mode {
+    background: #c6cfd8;
+
+    .ryancv-wrapper {
+
+      .ryancv-profile-card,
+      .ryancv-content-card,
+      .ryancv-navbar {
+        background: #ffffff;
+        color: #323232;
+        border-color: rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .ryancv-profile-card {
+        .profile-name {
+          color: #323232;
+        }
+
+        .profile-subtitle {
+          color: #646464;
+        }
+
+        .profile-socials a {
+          color: #646464;
+          border-color: rgba(0, 0, 0, 0.08);
+
+          &:hover {
+            color: $ryancv-accent;
+            border-color: $ryancv-accent;
+            box-shadow: 0 0 10px rgba(120, 204, 109, 0.2);
+          }
+        }
+
+        .profile-cover {
+          background: linear-gradient(135deg, rgba($ryancv-accent, 0.2) 0%, rgba(120, 204, 109, 0.01) 100%);
+        }
+
+        .profile-avatar {
+          border-color: #ffffff;
+        }
+      }
+
+      .ryancv-navbar {
+        .nav-tab-btn {
+          color: #646464;
+
+          &:hover,
+          &.active {
+            color: $ryancv-accent;
+          }
+        }
+      }
+
+      .info-list-item {
+        border-bottom-color: rgba(0, 0, 0, 0.05);
+
+        span {
+          color: #646464;
+        }
+
+        strong {
+          color: #323232;
+        }
+      }
+
+      .timeline-item {
+        border-left-color: rgba(0, 0, 0, 0.08);
+
+        &::before {
+          background: #ffffff;
+          border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        &.active::before {
+          background: $ryancv-accent;
+          border-color: $ryancv-accent;
+        }
+
+        .timeline-date {
+          border-color: rgba(0, 0, 0, 0.08);
+          color: #646464;
+
+          &.active {
+            color: $ryancv-accent;
+            border-color: $ryancv-accent;
+          }
+        }
+
+        .timeline-title {
+          color: #323232;
+        }
+      }
+
+      .skill-progress-bg {
+        background: rgba(0, 0, 0, 0.06);
+      }
+
+      .project-card-vcard {
+        background: #ffffff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+
+        &:hover {
+          border-color: rgba($ryancv-accent, 0.35);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 0 15px rgba(120, 204, 109, 0.08);
+        }
+
+        .project-title-vcard {
+          color: #1a1a1a;
+        }
+
+        .project-desc-vcard {
+          color: #555555;
+        }
+
+        .tech-badge-vcard {
+          background: rgba($ryancv-accent, 0.08);
+          border-color: rgba($ryancv-accent, 0.2);
+          color: #3b8731;
+        }
+
+        .project-footer-vcard {
+          color: #3b8731;
+        }
+      }
+
+      .contact-card-item {
+        background: #f7f9fa;
+        border-color: rgba(0, 0, 0, 0.04);
+
+        h6 {
+          color: #323232;
+        }
+      }
+
+      .contact-form-vcard {
+
+        input,
+        textarea {
+          background: #f7f9fa;
+          border-color: rgba(0, 0, 0, 0.08);
+          color: #323232;
+
+          &:focus {
+            background: #ffffff;
+            border-color: $ryancv-accent;
+          }
+        }
+      }
+    }
+  }
+
+  .ryancv-wrapper {
+    width: 100%;
+    max-width: 1140px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    position: relative;
+
+    // @media (min-width: 992px) {
+    //   grid-template-columns: 380px 1fr;
+    //   align-items: start;
+    // }
+
+    @media (min-width: 992px) {
+      grid-template-columns: 300px calc(100% - 340px);
+    }
+
+    @media (min-width: 1200px) {
+      grid-template-columns: 310px 1fr;
+    }
+
+    @media (min-width: 1400px) {
+      max-width: 1400px;
+    }
+  }
+
+  // Left Column - Profile Card
+  .ryancv-profile-card {
+    background: #18202a;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    color: #eaeaea;
+    max-height: fit-content;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @media (min-width: 992px) {
+      position: sticky;
+      top: 60px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
+    }
+
+    .profile-cover {
+      height: 180px;
+      position: relative;
+      background: linear-gradient(135deg, rgba($ryancv-accent, 0.4) 0%, rgba(120, 204, 109, 0.02) 100%);
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: -10%;
+        width: 120%;
+        height: 60px;
+        background: inherit;
+        transform: rotate(-5deg);
+        filter: blur(4px);
+      }
+
+      .layout-switch-corner {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 15;
+
+        button {
+          background: rgba(0, 0, 0, 0.55);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #ffffff;
+          padding: 8px 14px;
+          border-radius: 20px;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          transition: all 0.3s;
+
+          &:hover {
+            background: $ryancv-accent;
+            border-color: $ryancv-accent;
+            color: #12171b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(120, 204, 109, 0.35);
+          }
+        }
+      }
+    }
+
+    .profile-avatar-container {
+      position: relative;
+      margin-top: -85px;
+      margin-bottom: 20px;
+      display: inline-block;
+      z-index: 12;
+
+      .profile-avatar {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 4px solid #18202a;
+        object-fit: cover;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+        transition: all 0.4s ease;
+      }
+    }
+
+    .profile-name {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 5px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .profile-subtitle {
+      font-size: 13px;
+      font-weight: 600;
+      color: $ryancv-accent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      height: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+
+      .typed-cursor {
+        animation: blink 0.7s infinite;
+        font-weight: normal;
+      }
+    }
+
+    .profile-socials {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+
+      a {
+        color: #eaeaea;
+        font-size: 15px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+
+        &:hover {
+          color: $ryancv-accent;
+          border-color: $ryancv-accent;
+          background: rgba($ryancv-accent, 0.05);
+          box-shadow: 0 0 10px rgba($ryancv-accent, 0.2);
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .profile-actions {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 60px;
+
+      .profile-action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border: none;
+        background: transparent;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        &:first-child {
+          border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        &:hover {
+          background: rgba($ryancv-accent, 0.08);
+          color: $ryancv-accent;
+        }
+      }
+    }
+  }
+
+  // Right Column - Content Panel Grid Wrapper (Desktop: Horizontal Navbar at the top of content card)
+  .ryancv-content-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  // RyanCV Sticky Header Navbar
+  .ryancv-navbar {
+    background: #18202a;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    justify-content: space-around;
+    padding: 0 5px;
+    height: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+
+    // Sticky at top on mobile
+    @media (max-width: 991px) {
+      position: sticky;
+      top: 10px;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 992px) {
+      position: relative;
+      top: 0;
+      flex-direction: row;
+      height: 72px;
+      padding: 0 20px;
+      width: 100%;
+      justify-content: flex-start;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      padding: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      gap: 4px;
+      transition: all 0.3s;
+      text-decoration: none;
+      flex: 1;
+
+      @media (min-width: 992px) {
+        height: 100%;
+        padding: 0 15px;
+        flex-direction: row;
+        font-size: 11px;
+        gap: 8px;
+        flex: none;
+      }
+
+      span {
+        @media (max-width: 767px) {
+          display: none; // Hide text labels on mobile to prevent overflow/wrapping
+        }
+      }
+
+      .nav-tab-icon {
+        font-size: 20px; // Finger friendly on mobile
+        opacity: 0.75;
+        transition: transform 0.3s;
+
+        @media (min-width: 992px) {
+          font-size: 16px;
+        }
+      }
+
+      &:hover,
+      &.active {
+        color: $ryancv-accent;
+
+        .nav-tab-icon {
+          opacity: 1;
+          transform: translateY(-1px);
+        }
+      }
+
+      &.active {
+        border-bottom: 2px solid $ryancv-accent;
+
+        @media (min-width: 992px) {
+          border-bottom: 2px solid $ryancv-accent;
+          border-left: none;
+        }
+      }
+    }
+  }
+
+  // Content Card
+  .ryancv-content-card {
+    background: #18202a;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    min-height: 500px;
+    color: #eaeaea;
+
+    @media (max-width: 575px) {
+      padding: 24px;
+    }
+
+    // Stacked sub-sections styling (scroll-spy one page)
+    .tab-section-stacked {
+      padding-bottom: 45px;
+      margin-bottom: 45px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      scroll-margin-top: 80px; // smooth scrolling target offsets
+
+      @media (min-width: 992px) {
+        scroll-margin-top: 60px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .section-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #ffffff;
+      position: relative;
+      padding-bottom: 12px;
+      margin-bottom: 30px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-transform: capitalize;
+      letter-spacing: -0.01em;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2.5px;
+        background: $ryancv-accent;
+      }
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      font-weight: 700;
+      color: $ryancv-accent;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+
+  // Info details grid - EXACT FIT AND FIXED ALIGNMENT
+  .info-list-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px 25px;
+    margin-top: 25px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .info-list-item {
+      font-size: 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+      padding-bottom: 10px;
+      width: 100%;
+      word-break: break-word;
+
+      span {
+        color: #9ca3af;
+        min-width: 85px;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        padding-top: 2px;
+      }
+
+      strong {
+        color: #ffffff;
+        font-weight: 600;
+        text-align: left;
+        flex: 1;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // Timeline
+  .resume-timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 25px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: -35px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #18202a;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+    }
+
+    &.active::before {
+      background: $ryancv-accent;
+      border-color: $ryancv-accent;
+      box-shadow: 0 0 0 4px rgba($ryancv-accent, 0.15);
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      font-weight: 700;
+      color: #9ca3af;
+      padding: 2px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &.active {
+        color: $ryancv-accent;
+        border-color: $ryancv-accent;
+      }
+    }
+
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .timeline-company {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 12px;
+    }
+
+    .timeline-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #9ca3af;
+    }
+  }
+
+  // Skills Progress Meters
+  .skills-grid-vcard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 20px;
+
+    @media (min-width: 576px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .skill-meter-vcard {
+    .skill-info-vcard {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+
+      .skill-name-vcard {
+        color: #ffffff;
+      }
+
+      .skill-percentage-vcard {
+        color: $ryancv-accent;
+      }
+    }
+
+    .skill-progress-bg {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+
+      .skill-progress-bar {
+        height: 100%;
+        background: $ryancv-accent;
+        border-radius: 2px;
+        transition: width 1s ease-out;
+      }
+    }
+  }
+
+  // Slick Carousels Overrides (Single slide)
+  .ryancv-slick-container {
+    margin-top: 20px;
+    position: relative;
+    padding: 0 15px;
+
+    .slick-track {
+      display: flex !important;
+    }
+
+    .slick-slide {
+      padding: 0 10px;
+      height: inherit !important;
+      display: flex !important;
+      justify-content: center;
+
+      &>div {
+        width: 100%;
+        display: flex;
+      }
+    }
+
+    .slick-dots {
+      bottom: -35px;
+
+      li {
+        margin: 0 4px;
+
+        button::before {
+          color: #9ca3af;
+          opacity: 0.25;
+          font-size: 8px;
+          transition: all 0.3s;
+        }
+
+        &.slick-active button::before {
+          color: $ryancv-accent;
+          opacity: 1;
+          font-size: 10px;
+        }
+      }
+    }
+
+    // Customize Slider Prev/Next Controls
+    .slider-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s;
+
+      &:hover {
+        background: $ryancv-accent;
+        color: #12171b;
+        border-color: $ryancv-accent;
+        box-shadow: 0 4px 10px rgba(120, 204, 109, 0.3);
+      }
+
+      &.prev-arrow {
+        left: -15px;
+      }
+
+      &.next-arrow {
+        right: -15px;
+      }
+    }
+  }
+
+  .projects-grid-vcard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 25px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .project-card-vcard {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    text-decoration: none !important;
+    color: inherit;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      border-color: rgba($ryancv-accent, 0.35);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(120, 204, 109, 0.08);
+      transform: translateY(-6px);
+
+      .project-image-vcard img {
+        transform: scale(1.06);
+      }
+
+      .project-hover-overlay-vcard {
+        opacity: 1;
+
+        .visit-btn-vcard {
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .arrow-icon-vcard {
+        transform: translateX(4px);
+      }
+    }
+
+    .project-image-vcard {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+      @media (max-width: 575px) {
+        height: 170px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+
+      .project-hover-overlay-vcard {
+        position: absolute;
+        inset: 0;
+        background: rgba(18, 23, 27, 0.75);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 3;
+
+        .visit-btn-vcard {
+          color: #ffffff;
+          font-weight: 700;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          border: 1.5px solid $ryancv-accent;
+          padding: 10px 22px;
+          border-radius: 30px;
+          background: rgba($ryancv-accent, 0.15);
+          transform: translateY(15px) scale(0.9);
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          box-shadow: 0 4px 15px rgba(120, 204, 109, 0.25);
+
+          &:hover {
+            background: $ryancv-accent;
+            color: #12171b;
+            box-shadow: 0 6px 20px rgba(120, 204, 109, 0.4);
+          }
+        }
+      }
+    }
+
+    .project-body-vcard {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-tags-vcard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+
+      .tech-badge-vcard {
+        font-size: 10px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 12px;
+        background: rgba(120, 204, 109, 0.08);
+        border: 1px solid rgba(120, 204, 109, 0.15);
+        color: $ryancv-accent;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+    }
+
+    .project-title-vcard {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: color 0.3s;
+
+      .project-card-vcard:hover & {
+        color: $ryancv-accent;
+      }
+    }
+
+    .project-desc-vcard {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #9ca3af;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .project-footer-vcard {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: $ryancv-accent;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.3s ease;
+
+      .arrow-icon-vcard {
+        font-size: 10px;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  // Contact view details
+  .contact-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 35px;
+
+    @media (min-width: 576px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .contact-card-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      transition: border-color 0.3s;
+
+      &:hover {
+        border-color: rgba($ryancv-accent, 0.2);
+      }
+
+      .contact-icon {
+        font-size: 24px;
+        color: $ryancv-accent;
+        margin-bottom: 12px;
+      }
+
+      h6 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 6px;
+      }
+
+      p {
+        font-size: 13px;
+        color: #9ca3af;
+        margin: 0;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+
+          &:hover {
+            color: $ryancv-accent;
+          }
+        }
+      }
+    }
+  }
+
+  .contact-form-vcard {
+
+    input,
+    textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      color: #ffffff;
+      padding: 12px 16px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: all 0.3s;
+
+      &:focus {
+        border-color: $ryancv-accent;
+        background: rgba(255, 255, 255, 0.04);
+        box-shadow: 0 0 10px rgba(120, 204, 109, 0.1);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn-vcard {
+      background: transparent;
+      border: 2px solid $ryancv-accent;
+      color: $ryancv-accent;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+
+      &:hover {
+        background: $ryancv-accent;
+        color: #12171b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(120, 204, 109, 0.3);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+}
+
+// Typing cursor, avatar glow, and fade animations
+@keyframes rotateGlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

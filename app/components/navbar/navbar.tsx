@@ -4,14 +4,44 @@ import { useState, useEffect } from "react";
 import "./navbar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
-  faHouse, faUser, faFile, faLaptopCode, faAddressBook, faGear, faBars, faXmark, faSun, faMoon 
+  faHouse, faUser, faFile, faLaptopCode, faAddressBook, faGear, faBars, faXmark, faSun, faMoon,
+  faCompass, faLink, faList, faCode, faBriefcase, faGraduationCap, faCertificate, faAward, faBook, faHeart, faPhone, faEnvelope, faGlobe,
+  faIdCard
 } from "@fortawesome/free-solid-svg-icons";
+
+const iconMap: { [key: string]: any } = {
+  faHouse,
+  faUser,
+  faFile,
+  faLaptopCode,
+  faAddressBook,
+  faGear,
+  faBars,
+  faXmark,
+  faSun,
+  faMoon,
+  faCompass,
+  faLink,
+  faList,
+  faCode,
+  faBriefcase,
+  faGraduationCap,
+  faCertificate,
+  faAward,
+  faBook,
+  faHeart,
+  faPhone,
+  faEnvelope,
+  faGlobe
+};
 
 interface NavBarProps {
   data: any;
+  layoutStyle?: string;
+  onLayoutChange?: (style: string) => void;
 }
 
-export default function NavBar({ data }: NavBarProps) {
+export default function NavBar({ data, layoutStyle, onLayoutChange }: NavBarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState("dark");
@@ -51,14 +81,28 @@ export default function NavBar({ data }: NavBarProps) {
     }
   };
 
-  const menuItems = [
-    { label: "Home", href: "#home", icon: faHouse },
-    { label: "About", href: "#about", icon: faUser },
-    { label: "Skills", href: "#skills", icon: faFile },
-    { label: "Live Projects", href: "#liveprojects", icon: faLaptopCode },
-    { label: "Personal Projects", href: "#personalprojects", icon: faLaptopCode },
-    { label: "Contact", href: "#contactus", icon: faAddressBook }
+  const defaultMenuItems = [
+    { label: "Home", href: "#home", icon: "faHouse" },
+    { label: "About", href: "#about", icon: "faUser" },
+    { label: "Skills", href: "#skills", icon: "faFile" },
+    { label: "Live Projects", href: "#liveprojects", icon: "faLaptopCode" },
+    { label: "Personal Projects", href: "#personalprojects", icon: "faLaptopCode" },
+    { label: "Contact", href: "#contactus", icon: "faAddressBook" }
   ];
+
+  const menuItemsConfig = data?.navigation || defaultMenuItems;
+
+  interface MenuItem {
+    label: string;
+    href: string;
+    icon: any;
+  }
+
+  const menuItems: MenuItem[] = menuItemsConfig.map((item: any) => ({
+    label: item.label,
+    href: item.href,
+    icon: iconMap[item.icon] || iconMap[item.iconKey] || faLink
+  }));
 
   return (
     <>
@@ -100,6 +144,17 @@ export default function NavBar({ data }: NavBarProps) {
               <FontAwesomeIcon icon={faSun} className="switch-icon sun" />
               <FontAwesomeIcon icon={faMoon} className="switch-icon moon" />
             </div>
+
+            {onLayoutChange && (
+              <button
+                onClick={() => onLayoutChange(layoutStyle === "vcard" ? "default" : "vcard")}
+                className="layout-switch-btn"
+                title="Switch to Card Theme (RyanCV)"
+                aria-label="Switch Layout style"
+              >
+                <FontAwesomeIcon icon={faIdCard} />
+              </button>
+            )}
 
             <a href="/admin" className="admin-btn" title="Admin Control Panel">
               <FontAwesomeIcon icon={faGear} />
