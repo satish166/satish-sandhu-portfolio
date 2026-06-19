@@ -182,8 +182,8 @@
       }
 
       &:hover {
-        border-color: rgba(255, 126, 64, 0.3);
-        box-shadow: 0 0 10px rgba(255, 126, 64, 0.1);
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.3);
+        box-shadow: 0 0 10px rgba(var(--primary-color-rgb, 255, 126, 64), 0.1);
       }
       
       &:focus {
@@ -240,8 +240,8 @@
 
       &:hover {
         color: $cyan-accent;
-        background: rgba(255, 126, 64, 0.08);
-        border-color: rgba(255, 126, 64, 0.2);
+        background: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08);
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.2);
         transform: translateY(-2px);
       }
     }
@@ -312,7 +312,7 @@
 
           &:hover {
             color: $text-light;
-            background: rgba(255, 126, 64, 0.08);
+            background: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08);
             border-left: 3px solid $cyan-accent;
           }
         }

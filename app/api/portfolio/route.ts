@@ -185,6 +185,10 @@ function calculateDiff(oldData: any, newData: any): string[] {
   compareKeys(oldData.profile, newData.profile, "Profile");
   compareKeys(oldData.socials, newData.socials, "Socials");
 
+  if (oldData.primaryColor !== newData.primaryColor) {
+    changes.push(`Primary Color: "${oldData.primaryColor || ""}" ➔ "${newData.primaryColor || ""}"`);
+  }
+
   if (oldData.showHeader !== newData.showHeader) {
     const oldVal = oldData.showHeader !== false ? "Show" : "Hide";
     const newVal = newData.showHeader !== false ? "Show" : "Hide";

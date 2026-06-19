@@ -9,7 +9,7 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 10px rgba(255, 126, 64, 0.4);
+  box-shadow: 0 0 10px rgba(var(--primary-color-rgb, 255, 126, 64), 0.4);
   transition: width 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
               height 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
               background-color 0.2s, 
@@ -19,9 +19,9 @@
   &.hovered {
     width: 40px;
     height: 40px;
-    background-color: rgba(255, 126, 64, 0.05);
+    background-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.05);
     border: 1px solid $cyan-accent;
-    box-shadow: 0 0 15px rgba(255, 126, 64, 0.2);
+    box-shadow: 0 0 15px rgba(var(--primary-color-rgb, 255, 126, 64), 0.2);
   }
 
   &.clicked {

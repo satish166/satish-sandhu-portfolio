@@ -6,14 +6,14 @@ $border-glass-hover: rgba(255, 199, 59, 0.3);
 $text-light: #f9fafb;
 $text-muted: #9ca3af;
 $violet-accent: #ffc73b; // Using gold as secondary
-$cyan-accent: #ff7e40; // Using sunset orange as primary
+$cyan-accent: var(--primary-color, #ff7e40); // Using dynamic primary color
 
 // Adapt variables used globally
-$primary: #ff7e40; // Orange primary accent
+$primary: var(--primary-color, #ff7e40); // Orange primary accent
 $gray420: #0e0e12; // Charcoal base
 $gray: #9ca3af;
 
-$blue: #ff7e40;
+$blue: var(--primary-color, #ff7e40);
 $darkblue: #e06527;
 $light-blue: #181410;
 $mid-blue: #231c16;
