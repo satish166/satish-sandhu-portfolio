@@ -19,6 +19,21 @@ function base64ToArrayBuffer(base64: string): ArrayBuffer {
   return bytes.buffer;
 }
 
+function hexToRgb(hex: string): string {
+  hex = hex.replace(/^#/, "");
+  let r = 0, g = 0, b = 0;
+  if (hex.length === 3) {
+    r = parseInt(hex[0] + hex[0], 16);
+    g = parseInt(hex[1] + hex[1], 16);
+    b = parseInt(hex[2] + hex[2], 16);
+  } else if (hex.length === 6) {
+    r = parseInt(hex.substring(0, 2), 16);
+    g = parseInt(hex.substring(2, 4), 16);
+    b = parseInt(hex.substring(4, 6), 16);
+  }
+  return `${r}, ${g}, ${b}`;
+}
+
 export default function AdminPanel() {
   const [authorized, setAuthorized] = useState(false);
   const [passcode, setPasscode] = useState("");
@@ -868,6 +883,13 @@ export default function AdminPanel() {
     });
   };
 
+  const handlePrimaryColorChange = (value: string) => {
+    setPortfolioData({
+      ...portfolioData,
+      primaryColor: value
+    });
+  };
+
   // Image Upload handler
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, callback: (url: string) => void) => {
     const file = e.target.files?.[0];
@@ -1034,6 +1056,11 @@ export default function AdminPanel() {
   const getPendingChanges = () => {
     if (!originalData || !portfolioData) return [];
     const changes: string[] = [];
+
+    // Compare Primary Color
+    if (originalData.primaryColor !== portfolioData.primaryColor) {
+      changes.push(`Primary Color: "${originalData.primaryColor || ""}" ➔ "${portfolioData.primaryColor || ""}"`);
+    }
 
     // Compare Profile
     const origProfile = originalData.profile || {};
@@ -1551,6 +1578,14 @@ export default function AdminPanel() {
 
   return (
     <div className="admin-dashboard">
+      {portfolioData?.primaryColor && (
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            --primary-color: ${portfolioData.primaryColor};
+            --primary-color-rgb: ${hexToRgb(portfolioData.primaryColor)};
+          }
+        `}} />
+      )}
       {currentUser.permission === "Read Only" && (
         <div className="alert alert-info mx-0 mb-4 p-3 glass-card border-info-glow animate-fade-in text-center" style={{ borderColor: 'rgba(6, 182, 212, 0.4)', background: 'rgba(8, 20, 30, 0.9)', borderRadius: '12px' }}>
           <span className="text-info" style={{ fontWeight: '700', fontSize: '15px' }}>
@@ -1822,6 +1857,60 @@ export default function AdminPanel() {
                         value={portfolioData.profile?.address || ""}
                         onChange={(e) => handleProfileChange("address", e.target.value)}
                       />
+                    </div>
+
+                    {/* Theme Accent Color */}
+                    <h4 className="mt-4 border-top pt-3">Theme Accent Customization</h4>
+                    <div className="col-12 mb-3">
+                      <label className="form-label d-block">Primary Theme Accent Color</label>
+                      <div className="d-flex align-items-center gap-3 flex-wrap">
+                        <input
+                          type="color"
+                          className="form-control form-control-color"
+                          value={portfolioData.primaryColor || "#ff7e40"}
+                          onChange={(e) => handlePrimaryColorChange(e.target.value)}
+                          style={{ width: "80px", height: "42px", padding: "6px", cursor: "pointer", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", background: "transparent" }}
+                          title="Choose primary theme accent color"
+                        />
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={portfolioData.primaryColor || "#ff7e40"}
+                          onChange={(e) => handlePrimaryColorChange(e.target.value)}
+                          style={{ width: "120px", height: "42px", color: "#ffffff", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", padding: "8px 12px", fontSize: "14px", outline: "none" }}
+                          placeholder="#ff7e40"
+                          title="Type or paste primary color code"
+                        />
+                        <div className="d-flex gap-2 flex-wrap">
+                          {[
+                            { name: "Sunset Orange (Default)", hex: "#ff7e40" },
+                            { name: "RyanCV Green", hex: "#78cc6d" },
+                            { name: "Neon Cyan", hex: "#06b6d4" },
+                            { name: "Vibrant Purple", hex: "#8b5cf6" },
+                            { name: "Coral Red", hex: "#ef4444" },
+                            { name: "Golden Yellow", hex: "#ffc73b" }
+                          ].map((preset) => (
+                            <button
+                              key={preset.hex}
+                              type="button"
+                              className="btn btn-sm"
+                              onClick={() => handlePrimaryColorChange(preset.hex)}
+                              style={{
+                                background: preset.hex,
+                                color: "#000000",
+                                fontWeight: "700",
+                                border: portfolioData.primaryColor === preset.hex ? "2px solid #ffffff" : "1px solid rgba(0,0,0,0.2)",
+                                borderRadius: "20px",
+                                padding: "6px 12px",
+                                fontSize: "11px",
+                                opacity: portfolioData.primaryColor === preset.hex ? 1 : 0.85
+                              }}
+                            >
+                              {preset.name}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Social links */}

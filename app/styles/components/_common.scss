@@ -35,7 +35,7 @@ body {
     color: #2c2623;
 
     .page-layout {
-      background: radial-gradient(circle at 85% 15%, rgba(255, 126, 64, 0.05) 0%, transparent 45%),
+      background: radial-gradient(circle at 85% 15%, rgba(var(--primary-color-rgb, 255, 126, 64), 0.05) 0%, transparent 45%),
                   radial-gradient(circle at 15% 85%, rgba(255, 199, 59, 0.04) 0%, transparent 45%),
                   #fdfbf7 !important;
     }
@@ -56,12 +56,12 @@ body {
     // Glass cards in light mode
     .glass-card {
       background: rgba(255, 255, 255, 0.85) !important;
-      border-color: rgba(255, 126, 64, 0.08) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       box-shadow: 0 10px 30px rgba(45, 30, 20, 0.03) !important;
 
       &:hover {
-        border-color: rgba(255, 126, 64, 0.28) !important;
-        box-shadow: 0 16px 40px rgba(255, 126, 64, 0.08) !important;
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.28) !important;
+        box-shadow: 0 16px 40px rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       }
     }
 
@@ -75,16 +75,16 @@ body {
     // Project cards adjustments
     .browser-mockup {
       background: rgba(255, 255, 255, 0.9) !important;
-      border-color: rgba(255, 126, 64, 0.08) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       box-shadow: 0 10px 30px rgba(45, 30, 20, 0.03) !important;
 
       .browser-header {
         background: rgba(0, 0, 0, 0.02) !important;
-        border-bottom-color: rgba(255, 126, 64, 0.06) !important;
+        border-bottom-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.06) !important;
 
         .browser-address-bar {
           background: rgba(255, 255, 255, 0.9) !important;
-          border-color: rgba(255, 126, 64, 0.08) !important;
+          border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
           color: #7d726b !important;
         }
       }
@@ -103,27 +103,27 @@ body {
       }
 
       &:hover {
-        border-color: rgba(255, 126, 64, 0.3) !important;
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.3) !important;
         box-shadow: 0 20px 45px rgba(45, 30, 20, 0.06) !important;
       }
     }
 
     // Tech badges adjustments
     .tech-badge {
-      background: rgba(255, 126, 64, 0.06) !important;
-      border-color: rgba(255, 126, 64, 0.15) !important;
+      background: rgba(var(--primary-color-rgb, 255, 126, 64), 0.06) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.15) !important;
       color: #e65f2b !important;
     }
 
     // Navbar float container in light mode
     .navbar-container {
       background: rgba(255, 255, 255, 0.8) !important;
-      border-color: rgba(255, 126, 64, 0.08) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       box-shadow: 0 10px 30px rgba(45, 30, 20, 0.03) !important;
 
       &.scrolled {
         background: rgba(255, 255, 255, 0.92) !important;
-        border-color: rgba(255, 126, 64, 0.12) !important;
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.12) !important;
       }
 
       .nav-menu-desktop ul li a {
@@ -131,7 +131,7 @@ body {
 
         &:hover {
           color: #2c2623;
-          background: rgba(255, 126, 64, 0.04);
+          background: rgba(var(--primary-color-rgb, 255, 126, 64), 0.04);
         }
       }
 
@@ -139,12 +139,12 @@ body {
         .theme-switch-pill, .admin-btn {
           color: #5b534e !important;
           background: rgba(255, 255, 255, 0.6) !important;
-          border-color: rgba(255, 126, 64, 0.08) !important;
+          border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
 
           &:hover {
             color: $cyan-accent !important;
-            background: rgba(255, 126, 64, 0.05) !important;
-            border-color: rgba(255, 126, 64, 0.15) !important;
+            background: rgba(var(--primary-color-rgb, 255, 126, 64), 0.05) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.15) !important;
           }
         }
         
@@ -162,8 +162,8 @@ body {
 
       .banner-bg-grid {
         background-image: 
-          linear-gradient(to right, rgba(255, 126, 64, 0.03) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255, 126, 64, 0.03) 1px, transparent 1px) !important;
+          linear-gradient(to right, rgba(var(--primary-color-rgb, 255, 126, 64), 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(var(--primary-color-rgb, 255, 126, 64), 0.03) 1px, transparent 1px) !important;
       }
 
       .banner-content {
@@ -186,7 +186,7 @@ body {
         .developer-stats-bar {
           .stat-tile {
             background: rgba(255, 255, 255, 0.85) !important;
-            border-color: rgba(255, 126, 64, 0.08) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
             box-shadow: 0 10px 30px rgba(45, 30, 20, 0.03) !important;
 
             .stat-info {
@@ -199,7 +199,7 @@ body {
             }
 
             &:hover {
-              border-color: rgba(255, 126, 64, 0.28) !important;
+              border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.28) !important;
               background: rgba(255, 255, 255, 0.95) !important;
             }
           }
@@ -207,7 +207,7 @@ body {
 
         .hero-socials .social-btn {
           background: rgba(255, 255, 255, 0.8) !important;
-          border-color: rgba(255, 126, 64, 0.08) !important;
+          border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
           color: #5b534e !important;
 
           &:hover {
@@ -224,13 +224,13 @@ body {
           
           .avatar-image-card {
             background: rgba(255, 255, 255, 0.95) !important;
-            border-color: rgba(255, 126, 64, 0.08) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
             box-shadow: 0 15px 35px rgba(45, 30, 20, 0.05) !important;
           }
 
           .experience-badge {
             background: rgba(255, 255, 255, 0.95) !important;
-            border-color: rgba(255, 126, 64, 0.15) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.15) !important;
             box-shadow: 0 8px 24px rgba(45, 30, 20, 0.08) !important;
             
             .badge-text {
@@ -239,7 +239,7 @@ body {
           }
           
           &:hover .avatar-image-card {
-            border-color: rgba(255, 126, 64, 0.3) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.3) !important;
             box-shadow: 0 25px 45px rgba(45, 30, 20, 0.08) !important;
           }
         }
@@ -257,24 +257,24 @@ body {
       .personal-info {
         .about-image-wrapper {
           .about-image {
-            border-color: rgba(255, 126, 64, 0.15) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.15) !important;
             box-shadow: 0 15px 35px rgba(45, 30, 20, 0.05) !important;
           }
         }
         .personal-details-grid {
           .detail-card {
             background: rgba(255, 255, 255, 0.85) !important;
-            border-color: rgba(255, 126, 64, 0.08) !important;
+            border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
             box-shadow: 0 6px 18px rgba(45, 30, 20, 0.02) !important;
 
             &:hover {
-              border-color: rgba(255, 126, 64, 0.2) !important;
-              box-shadow: 0 10px 24px rgba(255, 126, 64, 0.06) !important;
+              border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.2) !important;
+              box-shadow: 0 10px 24px rgba(var(--primary-color-rgb, 255, 126, 64), 0.06) !important;
             }
 
             .detail-icon {
-              background: rgba(255, 126, 64, 0.06) !important;
-              border-color: rgba(255, 126, 64, 0.15) !important;
+              background: rgba(var(--primary-color-rgb, 255, 126, 64), 0.06) !important;
+              border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.15) !important;
               color: #e65f2b !important;
             }
 
@@ -302,12 +302,12 @@ body {
     .skill-box {
       h3 {
         color: #2c2623 !important;
-        border-bottom-color: rgba(255, 126, 64, 0.08) !important;
+        border-bottom-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       }
 
       .skill-list li {
         background: rgba(255, 255, 255, 0.7) !important;
-        border: 1px solid rgba(255, 126, 64, 0.06) !important;
+        border: 1px solid rgba(var(--primary-color-rgb, 255, 126, 64), 0.06) !important;
         box-shadow: 0 4px 12px rgba(45, 30, 20, 0.01) !important;
 
         h5 {
@@ -330,7 +330,7 @@ body {
     .carousel-controls-wrapper {
       .ctrl-btn {
         background: rgba(255, 255, 255, 0.8) !important;
-        border-color: rgba(255, 126, 64, 0.08) !important;
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
         color: #5b534e !important;
 
         &:hover {
@@ -353,7 +353,7 @@ body {
     // Personal Project section modifications
     .personal-card {
       background: rgba(255, 255, 255, 0.85) !important;
-      border-color: rgba(255, 126, 64, 0.08) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       box-shadow: 0 10px 30px rgba(45, 30, 20, 0.03) !important;
       
       .project-title-text {
@@ -366,15 +366,15 @@ body {
       }
 
       &:hover {
-        border-color: rgba(255, 126, 64, 0.28) !important;
-        box-shadow: 0 20px 45px rgba(255, 126, 64, 0.06) !important;
+        border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.28) !important;
+        box-shadow: 0 20px 45px rgba(var(--primary-color-rgb, 255, 126, 64), 0.06) !important;
       }
     }
 
     // Contact form light mode
     .contact-info-list .list-item {
       background: rgba(255, 255, 255, 0.85) !important;
-      border-color: rgba(255, 126, 64, 0.08) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       box-shadow: 0 10px 30px rgba(45, 30, 20, 0.02) !important;
 
       p, p a {
@@ -388,19 +388,19 @@ body {
 
     .get-in-touch {
       background: rgba(255, 255, 255, 0.85) !important;
-      border-color: rgba(255, 126, 64, 0.08) !important;
+      border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) !important;
       box-shadow: 0 20px 40px rgba(45, 30, 20, 0.04) !important;
 
       form .field {
         input, textarea {
           background: rgba(255, 255, 255, 0.9) !important;
-          border-color: rgba(255, 126, 64, 0.12) !important;
+          border-color: rgba(var(--primary-color-rgb, 255, 126, 64), 0.12) !important;
           color: #2c2623 !important;
 
           &:focus {
             border-color: $cyan-accent !important;
             background: #ffffff !important;
-            box-shadow: 0 0 12px rgba(255, 126, 64, 0.15) !important;
+            box-shadow: 0 0 12px rgba(var(--primary-color-rgb, 255, 126, 64), 0.15) !important;
           }
         }
       }
@@ -412,7 +412,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: radial-gradient(circle at 85% 15%, rgba(255, 126, 64, 0.08) 0%, transparent 45%),
+  background: radial-gradient(circle at 85% 15%, rgba(var(--primary-color-rgb, 255, 126, 64), 0.08) 0%, transparent 45%),
               radial-gradient(circle at 15% 85%, rgba(255, 199, 59, 0.05) 0%, transparent 45%),
               $bg-dark;
   width: 100%;
@@ -462,7 +462,7 @@ body {
 
   &:hover {
     border-color: $border-glass-hover;
-    box-shadow: 0 12px 40px 0 rgba(255, 126, 64, 0.1);
+    box-shadow: 0 12px 40px 0 rgba(var(--primary-color-rgb, 255, 126, 64), 0.1);
     transform: translateY(-4px);
   }
 }
@@ -556,8 +556,8 @@ h2.heading {
 .work-section,
 .contact-section {
   background-color: #0b0c13 !important;
-  border-top: 1px solid rgba(255, 126, 64, 0.04) !important;
-  border-bottom: 1px solid rgba(255, 126, 64, 0.04) !important;
+  border-top: 1px solid rgba(var(--primary-color-rgb, 255, 126, 64), 0.04) !important;
+  border-bottom: 1px solid rgba(var(--primary-color-rgb, 255, 126, 64), 0.04) !important;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
