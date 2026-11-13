@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import BootstrapClient from "./bootstrap.client";
 import AOSWrapper from "./components/AOSWrapper";
@@ -44,6 +45,7 @@ export default function RootLayout({
         <AOSWrapper>
           {children}
         </AOSWrapper>
+        <SpeedInsights />
       </body>
     </html>
   );
